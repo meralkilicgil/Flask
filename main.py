@@ -11,29 +11,39 @@ import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
 import fire
 from importlib import reload
+import os
 
 from flask import Flask, redirect, url_for, request, render_template
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('static/index.html')
+    return render_template('static/src/App.js')
 
-@app.route('/select', methods = ['POST', 'GET'])
+@app.route('/create', methods = ['POST'])
 def select():
     if request.method == 'POST':
-        choice = request.form['pl']
-        if(choice == 'tt'):
-            return redirect(get_Top())
+       # choice = request.form['pl']
+       # if(choice == 'tt')
+        #    return redirect(get_Top())
+        req = request.json
+        print(req)
+        artist = request.form['artist']
+        track = request.form['track']
+        count = request.form['count']
+        name = request.form['plName']
+        return getSimilar(artist, track, count, name)
+    else:
+       return redirect(url_for('/'))
 
 @app.route('/success')
 def goSuccess():
-    return render_template('static/creationSuccessful.html')
+    return render_template('static/Success.html')
 
 @app.route('/topTurkey')
 def get_Top():
    return getTopTracksByCountry("Turkey", 5, "top turkey")
-    
+  
 
 @app.route('/getSimilar/<artist>_<track>_<count>_<name>')
 def get_similar(artist, track, count, name):
@@ -63,7 +73,7 @@ def getSimilar(artist, track, count = 20, playlistName = None):
 
         track_IDs = getTrackIDs(result)
         generatePlaylist(track_IDs, playlistName)
-        
+        return goSuccess()
 
 
 def getUserTopTracks(lastFMUserName = lastFMUserName, period = "1month", count = 20, playlistName = None):
@@ -105,7 +115,7 @@ def getTopTracksByCountry(country, count = 50, playlistName = None):
         
         track_IDs = getTrackIDs(result)
         generatePlaylist (track_IDs, playlistName)
-        return '/success'
+        return goSuccess()
 
 def getTopTracksByArtist(artist, count = 20, playlistName = None):
     
@@ -749,4 +759,6 @@ if __name__ == '__main__':
   })
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.config['SITE'] = "http://0.0.0.0:5000/"
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug = True)
