@@ -1,0 +1,12 @@
+@media all and (min-width: 480px) {
+    .MakeSimilar {
+      padding: 60px 0;
+      text-align: center;
+    }
+  
+    .MakeSimilar form {
+      margin: 0 auto;
+      max-width: 320px;
+    }    
+  }
+  

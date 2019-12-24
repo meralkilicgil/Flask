@@ -16,18 +16,15 @@ import os
 from flask import Flask, redirect, url_for, request, render_template
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     return render_template('static/src/App.js')
 
-@app.route('/create', methods = ['POST'])
+
+@app.route('/create', methods=['POST'])
 def select():
     if request.method == 'POST':
-       # choice = request.form['pl']
-       # if(choice == 'tt')
-        #    return redirect(get_Top())
-        req = request.json
-        print(req)
         artist = request.form['artist']
         track = request.form['track']
         count = request.form['count']
@@ -36,18 +33,40 @@ def select():
     else:
        return redirect(url_for('/'))
 
+
 @app.route('/success')
 def goSuccess():
     return render_template('static/Success.html')
 
-@app.route('/topTurkey')
-def get_Top():
-   return getTopTracksByCountry("Turkey", 5, "top turkey")
-  
+@app.route('/toptracks_country', methods=['POST', 'GET'])
+def getTopTracksofCountry():
+    if request.method == 'POST':
+        country = request.form['country']
+        count = request.form['count']
+        name = request.form['plName']
+        return getTopTracksByCountry(country, count, name)
+    else:
+        return redirect(url_for('/'))
 
-@app.route('/getSimilar/<artist>_<track>_<count>_<name>')
-def get_similar(artist, track, count, name):
-    return getSimilar(artist, track, count, name)
+@app.route('/toptracks_artist', methods=['POST', 'GET'])
+def getTopTracksOfArtist():
+    if request.method == 'POST':
+        artist = request.form['artist']
+        count = request.form['count']
+        name = request.form['plName']
+        return getTopTracksByArtist(artist, count, name)
+    else:
+        return redirect(url_for('/'))
+
+@app.route('/toptracks_tag', methods=['POST', 'GET'])
+def getTopTracksOfTag():
+    if request.method == 'POST':
+        tag = request.form['tag']
+        count = request.form['count']
+        name = request.form['plName']
+        return getTopTracksByTag(tag, count, name)
+    else:
+        return redirect(url_for('/'))
 
 reload(sys)    # to re-enable sys.setdefaultencoding()
 #sys.setdefaultencoding('utf-8')

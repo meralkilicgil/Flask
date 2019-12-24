@@ -1,53 +1,43 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
-import Login from './Login/Login';
-import Success from './Success/Success';
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-class App extends React.Component{
+import Login from './NavBarItems/Login/Login';
+import Success from './NavBarItems/Success/Success';
+import MakeSimilar from './NavBarItems/MakeSimilar/MakeSimilar';
+import TopTracks from './NavBarItems/TopTracks/TopTracks';
+import Discovery from './NavBarItems/Discovery/Discovery';
 
-  constructor(props){
-      super(props);
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
   }
 
-  render(){
-    return(
-    <div className="App">
-      <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/success">Success</Link>
-          </li>
-        </ul>
-        <Switch>
-          <Route exact path="/">
-          <form action = "http://localhost:5000/create" method = "post">
-          
-            <p>Create playlist similar to: </p>
-            <p>Artist:   <input type="text" name="artist"></input></p>
-            <p>Song: <input type="text" name="track"></input></p>
-            <p>Count: <input type="text" name="count"></input></p>
-            <p>Name: <input type="text" name="plName"></input></p>
-            <input type="submit" value="Create" />
-          </form>
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/success">
-            <Success />
-          </Route>
-        </Switch>
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <div>
+            <aside className="mainsidebar">
+            <div className="navbar">
+              <ul className="nav">
+                <li className="navitem"><Link to="/" className="navlink">Login</Link></li>
+                <li className="navitem"><Link to="/similar" className="navlink">Make Similar Playlist</Link></li>
+                <li className="navitem"><Link to="/toptracks" className="navlink">Top Tracks</Link></li>
+                <li className="navitem"><Link to="/discovery" className="navlink">Discovery</Link></li>
+              </ul>
+            </div>
+            </aside>
+            <Switch>
+              <Route exact path="/"><Login /> </Route>
+              <Route path="/similar"><MakeSimilar /></Route>
+              <Route path="/toptracks"> <TopTracks /></Route>
+              <Route path="/discovery"> <Discovery /></Route>
+            </Switch>
+          </div>
+        </Router>
       </div>
-  </Router>
-  </div>
-  );   
- }
+    );
+  }
 }
 export default App;
