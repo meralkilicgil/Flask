@@ -1,8 +1,27 @@
 @media all and (min-width: 480px) {
     .Discovery {
-      padding: 60px 0;
+      text-align: center;
     }
-  
+    
+    .Discovery .tabs{
+      display: inline-block;
+      float: right;
+      margin-right: 280px;
+      margin-top: 80px;
+    }
+
+    .Discovery .selection{
+      display: inline-block;
+      float: left;
+      margin-left: 280px;
+      margin-top: 80px;
+    }
+
+    .Discovery table{
+      position: fixed;
+      margin-left: 260px;
+    }
+
     .Discovery form {
       margin: 0 auto;
       max-width: 320px;
