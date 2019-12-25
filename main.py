@@ -12,9 +12,10 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import fire
 from importlib import reload
 import os
-
+from urllib.parse import urlsplit, urlunsplit
 from flask import Flask, redirect, url_for, request, render_template
 app = Flask(__name__)
+global token2
 
 
 @app.route('/')
@@ -24,6 +25,9 @@ def index():
 
 @app.route('/create', methods=['POST'])
 def select():
+    global token2
+    split_url = urlsplit(request.url)
+    token2 = split_url.query
     if request.method == 'POST':
         artist = request.form['artist']
         track = request.form['track']
@@ -40,6 +44,9 @@ def goSuccess():
 
 @app.route('/toptracks_country', methods=['POST', 'GET'])
 def getTopTracksofCountry():
+    global token2
+    split_url = urlsplit(request.url)
+    token2 = split_url.query
     if request.method == 'POST':
         country = request.form['country']
         count = request.form['count']
@@ -50,6 +57,9 @@ def getTopTracksofCountry():
 
 @app.route('/toptracks_artist', methods=['POST', 'GET'])
 def getTopTracksOfArtist():
+    global token2
+    split_url = urlsplit(request.url)
+    token2 = split_url.query
     if request.method == 'POST':
         artist = request.form['artist']
         count = request.form['count']
@@ -60,6 +70,9 @@ def getTopTracksOfArtist():
 
 @app.route('/toptracks_tag', methods=['POST', 'GET'])
 def getTopTracksOfTag():
+    global token2
+    split_url = urlsplit(request.url)
+    token2 = split_url.query
     if request.method == 'POST':
         tag = request.form['tag']
         count = request.form['count']
@@ -528,12 +541,15 @@ def showTagInfo (tag):
 
 def generatePlaylist(track_IDs, playlistName):
     """."""
-
+    global token2
     if len(track_IDs) != 0:
         scope = "playlist-modify-public"
-        token = util.prompt_for_user_token(username=username, client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri, scope=scope)
+        token = token2
         
         if token:
+            hasharr = token.split("%3F")
+            username = hasharr[0]
+            token = hasharr[1]
             sp = spotipy.Spotify(auth=token)
             sp.trace = False
             playlist = sp.user_playlist_create(username, playlistName)
@@ -546,6 +562,7 @@ def generatePlaylist(track_IDs, playlistName):
                         sp.user_playlist_add_tracks(username, playlist.get('id'), track_IDs[i*100:(i+1)*100])
                         i += 1
                 print (playlistName + " has been created successfully...")
+                return goSuccess()
 
         else:
             print("Can't get token for ", username)

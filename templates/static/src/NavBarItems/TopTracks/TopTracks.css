@@ -1,10 +1,18 @@
 @media all and (min-width: 480px) {
     .TopTracks {
       padding: 60px 0;
+      display: inline-block;
     }
   
     .TopTracks form {
       margin: 0 auto;
       max-width: 320px;
+    }
+
+    .country .tag .artist{
+      display: inline-block;
+      float: left;
+      margin-left: 280px;
+      margin-top: 80px;
     }
   }

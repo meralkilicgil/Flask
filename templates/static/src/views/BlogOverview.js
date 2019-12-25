@@ -61,7 +61,7 @@ const BlogOverview = ({ smallStats }) => {
     axios.get("https://api.spotify.com/v1/me/")
           .then( (data) => {
               first = data.data.display_name;
-              window.location.href = `http://localhost:5000/callback?${data.data.display_name}?${token}`;
+              window.location.href = `http://localhost:3000/callback?${data.data.display_name}?${token}`;
           //setState({
           //...successData,
           //[data.data.items.name ] : data.data.items.popularity

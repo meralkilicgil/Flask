@@ -3,23 +3,22 @@ import PropTypes from "prop-types";
 import { Container, Row, Col, Button, Form} from "shards-react";
 import axios from "axios";
 
-import PageTitle from "../../components/common/PageTitle";
-import SmallStats from "../../components/common/SmallStats";
-import UsersOverview from "../../components/blog/UsersOverview";
-import UsersByDevice from "../../components/blog/UsersByDevice";
-import NewDraft from "../../components/blog/NewDraft";
-import Discussions from "../../components/blog/Discussions";
-import TopReferrals from "../../components/common/TopReferrals";
-import './MakeSimilar.css';
+import PageTitle from "../../../components/common/PageTitle";
+import SmallStats from "../../../components/common/SmallStats";
+import UsersOverview from "../../../components/blog/UsersOverview";
+import UsersByDevice from "../../../components/blog/UsersByDevice";
+import NewDraft from "../../../components/blog/NewDraft";
+import Discussions from "../../../components/blog/Discussions";
+import TopReferrals from "../../../components/common/TopReferrals";
+import './Artist.css';
 import FormGroup from "react-bootstrap/FormGroup";
 import FormControl from "react-bootstrap/FormControl";
 import FormLabel from "react-bootstrap/FormLabel";
 
-
 const fs = require('fs') 
 
 
-const MakeSimilar = ({ smallStats }) => {
+const Artist = ({ smallStats }) => {
 
   let first = 0;
   const  [token, setToken] = useState("");
@@ -88,50 +87,17 @@ const MakeSimilar = ({ smallStats }) => {
     })
     
     console.log(2)
-const urlkey = `http://localhost:5000/create?${usernameToken}?${token}`
-return(
-    <div className="MakeSimilar">
-    <form action={urlkey} method="post">
-        <h1>Create Similar Playlist </h1>
-        <FormLabel>Artist <FormControl autoFocus type="text" name="artist"></FormControl> </FormLabel> 
-        <FormLabel>Song<FormControl autoFocus type="text" name="track"></FormControl> </FormLabel>
-        <FormLabel>Count <FormControl autoFocus type="text" name="count"></FormControl></FormLabel>
-        <FormLabel>Playlist Name <FormControl autoFocus type="text" name="plName"></FormControl></FormLabel> 
-        <Button block type="submit">Create </Button>
-    </form>
-</div>
-);
-}
-
-
-
-
-/*import React from 'react';
-import './MakeSimilar.css';
-import Button from "react-bootstrap/Button";
-import FormGroup from "react-bootstrap/FormGroup";
-import FormControl from "react-bootstrap/FormControl";
-import FormLabel from "react-bootstrap/FormLabel";
-
-class MakeSimilar extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
+const urlkey = `http://localhost:5000/toptracks_artist?${usernameToken}?${token}`
         return (
-            <div className="MakeSimilar">
-                <form action="http://localhost:5000/create" method="post">
-                    <h1>Create Similar Playlist </h1>
-                    <FormLabel>Artist <FormControl autoFocus type="text" name="artist"></FormControl> </FormLabel> 
-                    <FormLabel>Song<FormControl autoFocus type="text" name="track"></FormControl> </FormLabel>
+            <div className="artist">
+                <form action={urlkey} method="post">
+                    <h1>Top Tracks of Artist</h1>
+                    <FormLabel>Artist<FormControl autoFocus type="text" name="artist"></FormControl> </FormLabel>
                     <FormLabel>Count <FormControl autoFocus type="text" name="count"></FormControl></FormLabel>
-                    <FormLabel>Playlist Name <FormControl autoFocus type="text" name="plName"></FormControl></FormLabel> 
+                    <FormLabel>Playlist Name <FormControl autoFocus type="text" name="plName"></FormControl></FormLabel>
                     <Button block type="submit">Create </Button>
                 </form>
             </div>
         );
-    }
-}*/
-export default MakeSimilar;
+}
+export default Artist;
