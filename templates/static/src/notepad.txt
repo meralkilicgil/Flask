@@ -1,0 +1,84 @@
+  // state = {
+  //   options: [
+  //     {
+  //       text: "Choose your option",
+  //       value: "0"
+  //     },
+  //     {
+  //       text: "showtopalbumsbytag",
+  //       value: "1"
+  //     },
+  //     {
+  //       text: "showsimilarartists",
+  //       value: "2"
+  //     },
+  //     {
+  //       text: "showtopartistschart",
+  //       value: "3"
+  //     },
+  //     {
+  //       text: "showtopartistsbycountry",
+  //       value: "4"
+  //     },
+  //     {
+  //       text: "showtoptrackschart",
+  //       value: "5"
+  //     },
+  //     {
+  //       text: "showtoptracksbyartist",
+  //       value: "6"
+  //     },
+  //     {
+  //       text: "showtoptracksbytag",
+  //       value: "7"
+  //     },
+  //     {
+  //       text: "showtoptagsforalbum",
+  //       value: "8"
+  //     },
+  //     {
+  //       text: "showtoptagsforartist",
+  //       value: "9"
+  //     },
+  //     {
+  //       text: "showtoptagsfortrack",
+  //       value: "10"
+  //     },
+  //     {
+  //       text: "showtoptagschart",
+  //       value: "11"
+  //     },
+  //     {
+  //       text: "showtaginfo",
+  //       value: "12"
+  //     },
+  //     {
+  //       text: "showsimilartags",
+  //       value: "13"
+  //     },
+  //     {
+  //       text: "showrandomtag",
+  //       value: "14"
+  //     },
+  //     {
+  //       text: "showtoptags",
+  //       value: "15"
+  //     }
+  //   ]
+  // };
+
+  <div className="tabs">
+          {(function () {
+            switch (this.state.value) {
+              case '0':
+                return <Track />;
+              case '1':
+                return <Success/>;
+              case '2':
+                return <p> invalid </p>;
+              default:
+                return null;
+            }
+          })()}
+          {/* {(this.state.value == "1") ? <Track /> : <Success/>} */}
+        </div>

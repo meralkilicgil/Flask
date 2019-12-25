@@ -1,0 +1,5 @@
+export default {
+  CHANGE: "CHANGE",
+  TOGGLE_SIDEBAR: "TOGGLE_SIDEBAR",
+  SET_TOKEN: "SET_TOKEN"
+};
