@@ -1,6 +1,6 @@
 @media all and (min-width: 480px) {
     .MakeSimilar {
-      padding: 60px 0;
+      padding: 50px 0;
       text-align: center;
     }
   
@@ -8,5 +8,19 @@
       margin: 0 auto;
       max-width: 320px;
     }    
+
+    .MakeSimilar .selection{
+      display: inline-block;
+      float: left;
+      margin-left: 280px;
+      margin-top: 50px;
+    }
+
+    .MakeSimilar .tabs{
+      display: inline-block;
+      float: right;
+      margin-right: 280px;
+      margin-top: 50px;
+    }
   }
   

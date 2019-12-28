@@ -27,8 +27,7 @@ class App extends React.Component {
             <div className="navbar">
               <ul className="nav">
                 <li className="navitem"><Link to="/" className="navlink">Login</Link></li>
-                <li className="navitem"><Link to="/similar" className="navlink">Make Similar Playlist</Link></li>
-                <li className="navitem"><Link to="/toptracks" className="navlink">Top Tracks</Link></li>
+                <li className="navitem"><Link to="/similar" className="navlink">Create Playlists</Link></li>
                 <li className="navitem"><Link to="/discovery" className="navlink">Discovery</Link></li>
               </ul>
             </div>
@@ -36,30 +35,11 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/"><Login /> </Route>
               <Route path="/similar"><MakeSimilar /></Route>
-              <Route path="/toptracks"> <TopTracks /></Route>
               <Route path="/discovery"> <Discovery /></Route>
             </Switch>
           </div>
         </Router>
         <Router basename={process.env.REACT_APP_BASENAME || ""}>
-    {/* <div>
-      {routes.map((route, index) => {
-        return (
-          <Route
-            key={index}
-            path={route.path}
-            exact={route.exact}
-            component={withTracker(props => {
-              return (
-                <route.layout {...props}>
-                  <route.component {...props} />
-                </route.layout>
-              );
-            })}
-          />
-        );
-      })}
-    </div> */}
   </Router>
       </div>
     );

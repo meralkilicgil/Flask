@@ -81,6 +81,21 @@ def getTopTracksOfTag():
     else:
         return redirect(url_for('/'))
 
+@app.route('/', methods=['POST', 'GET'])
+def getTopAlbumsOfTag():
+    global token2
+    split_url = urlsplit(request.url)
+    token2 = split_url.query
+    if request.method == 'POST':
+        tag = request.form['tag']
+        count = request.form['count']
+        your_list= showTopAlbumsByTag(tag, count)
+        #return render_template('static/Success.html', your_list=your_list)
+        return render_template('static/src/App.js')
+    else:
+        return redirect(url_for('/'))
+
+
 reload(sys)    # to re-enable sys.setdefaultencoding()
 #sys.setdefaultencoding('utf-8')
 
@@ -160,7 +175,7 @@ def getTopTracksByArtist(artist, count = 20, playlistName = None):
 
         track_IDs = getTrackIDs(result)
         generatePlaylist (track_IDs, playlistName)
-
+        return goSuccess()
 
 
 def getTopTracksByTag (tag, count = 25, playlistName = None):
@@ -174,7 +189,7 @@ def getTopTracksByTag (tag, count = 25, playlistName = None):
         
         track_IDs = getTrackIDs(result)
         generatePlaylist (track_IDs, playlistName)
-
+        return goSuccess()
 
 
 def getUserTopAlbums(lastFMUserName = lastFMUserName, count = 10, period = '3month', playlistName = None):
@@ -190,7 +205,6 @@ def getUserTopAlbums(lastFMUserName = lastFMUserName, count = 10, period = '3mon
         generatePlaylist(track_IDs, playlistName)
 
 
-
 def getTopTracksChart (count = 25, playlistName = None):
     
     print ("Top Songs by Last.FM")
@@ -202,7 +216,7 @@ def getTopTracksChart (count = 25, playlistName = None):
         
         track_IDs = getTrackIDs(result)
         generatePlaylist (track_IDs, playlistName)
-
+        return goSuccess()
 
 
 def getTopAlbumsByTag (tag, count = 10, playlistName = None):
@@ -215,7 +229,7 @@ def getTopAlbumsByTag (tag, count = 10, playlistName = None):
 
         track_IDs = getTrackIDsFromAlbum(getAlbumIDs(result))
         generatePlaylist(track_IDs, playlistName)
-
+        return goSuccess()
 
 
 def showTopTagsForArtist (artist):
@@ -380,8 +394,8 @@ def showTopAlbumsByTag (tag, count = 20):
         for r in result:
             print("{0} - {1}".format(r[0], r[1]))
             print ("{0:20s}".format("-------------------------------------------------------------"))
-
-
+     
+    return result
 
 def showTopTracksByTag (tag, count = 20):
     print ("{0:20s}".format("-------------------------------------------------------------"))

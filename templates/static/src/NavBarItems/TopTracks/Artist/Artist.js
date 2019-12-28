@@ -81,7 +81,7 @@ const Artist = ({ smallStats }) => {
 
     componentDidMount();
     window.location.hash = "";
-    console.log(`TOken before ${token}`)
+    console.log(`Token before ${token}`)
     useEffect( () => {
       getData( token);
     })

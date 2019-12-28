@@ -35,7 +35,6 @@ class Discovery extends React.Component {
     return (
       <div className="Discovery">
         <div className="selection">
-          <form action="http://localhost:5000/discovery" method="post">
             <h1>Select what you want to discover</h1>          
               <InputGroup className="mb-3">
                 <FormSelect onChange={this.handleChange}>
@@ -44,16 +43,21 @@ class Discovery extends React.Component {
                 <option value='2'>Show top tracks by tag</option>
                 </FormSelect>
               </InputGroup>
-              <Button block>Create </Button>
-          </form>
         </div>
         <div className="tabs">
         {(() => {
             switch (this.state.value) {
-              case '0':
-                return <Track />;
               case '1':
-                return <Success/>;
+                return (
+                  <div className="topAlbumsTag">
+                    <form action="http://localhost:5000/discoverAlbums" method="post">
+                    <h2>Show Top albums by Tag </h2>
+                    <FormLabel>Tag <FormControl autoFocus type="text" name="tag"></FormControl> </FormLabel>
+                    <FormLabel>Count <FormControl autoFocus type="text" name="count"></FormControl></FormLabel>
+                    <Button block type="submit">Create </Button>
+                  </form>
+                  </div>
+                );
               case '2':
                 return <p> invalid </p>;
               default:

@@ -41,10 +41,16 @@
     </head>
     <body>
         <div>  
-            <form action = "http://localhost:3000">
+            <form action = "http://localhost:3000/similar">
               <p style="font-size: large;">Your playlist has been successfully created! </p>    
               <input type="submit" value="Back to main page"/>
             </form>
+            <div>
+              <h3>Result of top albums of tag: </h3>
+              {% for your_list_element in your_list %}
+                  <p>{{ your_list_element }} </p>
+              {% endfor %}
+            </div>
         </div>
     </body>
 </html>
