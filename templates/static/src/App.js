@@ -6,7 +6,7 @@ import Success from './NavBarItems/Success/Success';
 import MakeSimilar from './NavBarItems/MakeSimilar/MakeSimilar';
 import TopTracks from './NavBarItems/TopTracks/TopTracks';
 import Discovery from './NavBarItems/Discovery/Discovery';
-
+import DataInfo from './NavBarItems/DataScreen/DataScreen';
 import routes from "./routes";
 import withTracker from "./withTracker";
 
@@ -24,23 +24,24 @@ class App extends React.Component {
         <Router>
           <div>
             <aside className="mainsidebar">
-            <div className="navbar">
-              <ul className="nav">
-                <li className="navitem"><Link to="/" className="navlink">Login</Link></li>
-                <li className="navitem"><Link to="/similar" className="navlink">Create Playlists</Link></li>
-                <li className="navitem"><Link to="/discovery" className="navlink">Discovery</Link></li>
-              </ul>
-            </div>
+              <div className="navbar">
+                <ul className="nav">
+                  <li className="navitem"><Link to="/" className="navlink">Login</Link></li>
+                  <li className="navitem"><Link to="/similar" className="navlink">Create Playlists</Link></li>
+                  <li className="navitem"><Link to="/discovery" className="navlink">Discovery</Link></li>
+                </ul>
+              </div>
             </aside>
             <Switch>
               <Route exact path="/"><Login /> </Route>
               <Route path="/similar"><MakeSimilar /></Route>
               <Route path="/discovery"> <Discovery /></Route>
+              <Route path="/data"><DataInfo /></Route>
             </Switch>
           </div>
         </Router>
         <Router basename={process.env.REACT_APP_BASENAME || ""}>
-  </Router>
+        </Router>
       </div>
     );
   }

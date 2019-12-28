@@ -26,8 +26,6 @@ def index():
 @app.route('/create', methods=['POST'])
 def select():
     global token2
-    split_url = urlsplit(request.url)
-    token2 = split_url.query
     if request.method == 'POST':
         artist = request.form['artist']
         track = request.form['track']
@@ -37,6 +35,12 @@ def select():
     else:
        return redirect(url_for('/'))
 
+@app.route('/data')
+def data():
+    global token2
+    split_url = urlsplit(request.url)
+    token2 = split_url.query
+    return redirect('http://localhost:3000/similar')
 
 @app.route('/success')
 def goSuccess():
@@ -45,8 +49,6 @@ def goSuccess():
 @app.route('/toptracks_country', methods=['POST', 'GET'])
 def getTopTracksofCountry():
     global token2
-    split_url = urlsplit(request.url)
-    token2 = split_url.query
     if request.method == 'POST':
         country = request.form['country']
         count = request.form['count']
@@ -58,8 +60,6 @@ def getTopTracksofCountry():
 @app.route('/toptracks_artist', methods=['POST', 'GET'])
 def getTopTracksOfArtist():
     global token2
-    split_url = urlsplit(request.url)
-    token2 = split_url.query
     if request.method == 'POST':
         artist = request.form['artist']
         count = request.form['count']
@@ -71,8 +71,6 @@ def getTopTracksOfArtist():
 @app.route('/toptracks_tag', methods=['POST', 'GET'])
 def getTopTracksOfTag():
     global token2
-    split_url = urlsplit(request.url)
-    token2 = split_url.query
     if request.method == 'POST':
         tag = request.form['tag']
         count = request.form['count']
@@ -81,21 +79,90 @@ def getTopTracksOfTag():
     else:
         return redirect(url_for('/'))
 
-@app.route('/', methods=['POST', 'GET'])
-def getTopAlbumsOfTag():
+@app.route('/discoverAlbumByTag', methods=['POST', 'GET'])
+def showTopAlbumsOfTag():
     global token2
-    split_url = urlsplit(request.url)
-    token2 = split_url.query
     if request.method == 'POST':
         tag = request.form['tag']
         count = request.form['count']
         your_list= showTopAlbumsByTag(tag, count)
-        #return render_template('static/Success.html', your_list=your_list)
-        return render_template('static/src/App.js')
-    else:
-        return redirect(url_for('/'))
+        return render_template('static/Success.html', your_list=your_list)
+        #return redirect('http://localhost:3000/discovery', code=301)
 
+@app.route('/discoverTrackByTag', methods=['POST', 'GET'])
+def showTopTracksOfTag():
+    global token2
+    if request.method == 'POST':
+        tag = request.form['tag']
+        count = request.form['count']
+        your_list= showTopTracksByTag(tag, count)
+        return render_template('static/Success.html', your_list=your_list)
+        #return redirect('http://localhost:3000/discovery', code=301)
 
+@app.route('/discoverArtistByTag', methods=['POST', 'GET'])
+def showTopArtistsOfTag():
+    global token2
+    if request.method == 'POST':
+        tag = request.form['tag']
+        count = request.form['count']
+        your_list= showTopArtistsByTag(tag, count)
+        return render_template('static/Success.html', your_list=your_list)
+
+@app.route('/discoverShowRandomTag', methods=['POST', 'GET'])
+def showRandomTagType():
+    global token2
+    if request.method == 'POST':
+        your_list= showRandomTag()
+        return render_template('static/Success.html', your_list=your_list)
+        
+@app.route('/discoverTagByArtist', methods=['POST', 'GET'])
+def showTopTagsOfArtist():
+    global token2
+    if request.method == 'POST':
+        artist = request.form['artist']
+        your_list= showTopTagsForArtist(artist)
+        return render_template('static/Success.html', your_list=your_list)
+
+@app.route('/discoverTrackByArtist', methods=['POST', 'GET'])
+def showTopTracksOfArtist():
+    global token2
+    if request.method == 'POST':
+        artist = request.form['artist']
+        count = request.form['count']
+        your_list= showTopTracksByArtist(artist, count)
+        return render_template('static/Success.html', your_list=your_list)
+
+@app.route('/discoverTopArtists', methods=['POST', 'GET'])
+def showTopArtistList():
+    global token2
+    if request.method == 'POST':
+        your_list= showTopArtistsChart()
+        return render_template('static/Success.html', your_list=your_list)
+
+@app.route('/discoverTracksByCountry', methods=['POST', 'GET'])
+def showTopTracksOfCountry():
+    global token2
+    if request.method == 'POST':
+        country = request.form['country']
+        your_list= showTopTracksByCountry(country)
+        return render_template('static/Success.html', your_list=your_list)     
+
+@app.route('/discoverArtistByCountry', methods=['POST', 'GET'])
+def showTopArtistsOfCountry():
+    global token2
+    if request.method == 'POST':
+        country = request.form['country']
+        your_list= showTopArtistsByCountry(country)
+        return render_template('static/Success.html', your_list=your_list)   
+
+@app.route('/discoverTagInfo', methods=['POST', 'GET'])
+def printTagInfo():
+    global token2
+    if request.method == 'POST':
+        tag = request.form['tag']
+        your_list = showTagInfo(tag)
+        return render_template('static/Success.html', your_list=your_list)   
+        
 reload(sys)    # to re-enable sys.setdefaultencoding()
 #sys.setdefaultencoding('utf-8')
 
@@ -242,12 +309,12 @@ def showTopTagsForArtist (artist):
 
     if result is not None:
         index = 0
-        for i in range(len(result)/4):
+        for i in range(len(result)//4):
             print ("%-20s --> [%s]\t %-20s --> [%s]\t %-20s --> [%s]\t %-20s --> [%s]")
             print((result[index][0], result[index][1], result[index+1][0], result[index+1][1], result[index+2][0], result[index+2][1], result[index+3][0], result[index+3][1]))
             index = index + 4    
         print ("{0:20s}".format("-------------------------------------------------------------"))
-
+    return result
 
 
 def showTopTags ():
@@ -310,7 +377,7 @@ def showTopTagsChart ():
     
     if result is not None:
         index = 0
-        for i in range(len(result)/5):
+        for i in range(len(result)//5):
             print ("%-20s\t %-20s\t %-20s\t %-20s\t %-20s" )
             print( (result[index], result[index+1], result[index+2], result[index+3], result[index+4]))
             index = index + 5   
@@ -327,12 +394,12 @@ def showTopArtistsByTag (tag, count = 25):
 
     if result is not None:
         index = 0
-        for i in range(len(result)/5):
+        for i in range(len(result)//5):
             print ("%-20s\t %-20s\t %-20s\t %-20s\t %-20s" )
             print( (result[index], result[index+1], result[index+2], result[index+3], result[index+4]))
             index = index + 5 
         print ("{0:20s}".format("-------------------------------------------------------------"))
-
+    return result
 
 
 def showSimilarArtists (artist, count = 15):
@@ -358,7 +425,7 @@ def showTopTagsForTrack (artist, track):
 
     if result is not None:
         index = 0
-        for i in range(len(result)/4):
+        for i in range(len(result)//4):
             print ("%-20s --> [%s]\t %-20s --> [%s]\t %-20s --> [%s]\t %-20s --> [%s]")
             print( (result[index][0], result[index][1], result[index+1][0], result[index+1][1], result[index+2][0], result[index+2][1], result[index+3][0], result[index+3][1]))
             index = index + 4
@@ -375,7 +442,7 @@ def showTopTagsForAlbum (artist, album):
 
     if result is not None:
         index = 0
-        for i in range(len(result)/4):
+        for i in range(len(result)//4):
             print ("%-20s --> [%s]\t %-20s --> [%s]\t %-20s --> [%s]\t %-20s --> [%s]" )
             print ((result[index][0], result[index][1], result[index+1][0], result[index+1][1], result[index+2][0], result[index+2][1], result[index+3][0], result[index+3][1]))
             index = index + 4
@@ -409,7 +476,7 @@ def showTopTracksByTag (tag, count = 20):
             print("{0} - {1}".format(r[0], r[1]))
             print ("{0:20s}".format("-------------------------------------------------------------"))
 
-
+    return result
 
 def showTopTracksByArtist (artist, count = 20):
     print ("{0:20s}".format("-------------------------------------------------------------"))
@@ -423,7 +490,7 @@ def showTopTracksByArtist (artist, count = 20):
             print("{0} - {1}".format(r[0].capitalize(), r[1]))
             print ("{0:20s}".format("-------------------------------------------------------------"))
 
-
+    return result
 
 def showTopTracksByCountry (country):
     print ("{0:20s}".format("-------------------------------------------------------------"))
@@ -437,7 +504,7 @@ def showTopTracksByCountry (country):
             print ("{0}. {1} - {2}".format(index+1, r[0], r[1]))
             print ("{0:20s}".format("-------------------------------------------------------------")) 
 
-
+    return result
 
 def showTopArtistsChart ():
     print ("{0:20s}".format("-------------------------------------------------------------"))
@@ -450,8 +517,7 @@ def showTopArtistsChart ():
         for index,r in enumerate(result):
             print ("{0} - {1}".format(index+1, r))
             print ("{0:20s}".format("-------------------------------------------------------------"))  
-
-
+    return result
 
 def showTopArtistsByCountry (country):
     print ("{0:20s}".format("-------------------------------------------------------------"))
@@ -465,7 +531,7 @@ def showTopArtistsByCountry (country):
             print ("{0} - {1}".format(index+1, r))
             print ("{0:20s}".format("-------------------------------------------------------------"))  
 
-
+    return result
 
 def showTopTracksChart ():
     print ("{0:20s}".format("-------------------------------------------------------------"))
@@ -550,7 +616,7 @@ def showTagInfo (tag):
         print ("no info....")
     
     print ("{0:20s}".format("-------------------------------------------------------------"))
-
+    return result
 
 
 def generatePlaylist(track_IDs, playlistName):
@@ -591,7 +657,7 @@ def getTrackIDs(result):
     
     client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    sp.trace = False;
+    sp.trace = False
     
 
     for r in result:
@@ -648,7 +714,7 @@ def getAlbumIDs (result):
     album_IDs = []
     client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    sp.trace = False;
+    sp.trace = False
 
     for r in result:
         search_res = sp.search(q='artist:{0} album:{1}'.format(r[0], r[1]), type='album', limit=1, market='TR')
@@ -667,7 +733,7 @@ def getTrackIDsFromAlbum (album_IDs):
     track_IDs = [] 
     client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    sp.trace = False;
+    sp.trace = False
 
     for album_ID in album_IDs:
         i = 0
@@ -707,7 +773,7 @@ def showRandomTag (count = 20):
     for genre in genres:
         print ("{0}".format(genre))
         print ("{0:20s}".format("-------------------------------------------------------------"))
-
+    return genres
 
 
 def AnalyzeTrack (artist, track, show_attribute = None):
@@ -717,7 +783,7 @@ def AnalyzeTrack (artist, track, show_attribute = None):
     trackID = getTrackIDs(l2)
     client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    sp.trace = False;
+    sp.trace = False
     features = sp.audio_features(trackID)
     
     if show_attribute is not None:
@@ -736,7 +802,7 @@ def AudioFeatures (data, attributes=[]):
 
     client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    sp.trace = False;
+    sp.trace = False
     
     features = sp.audio_features(track_IDs)
 

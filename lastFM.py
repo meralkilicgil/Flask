@@ -310,7 +310,7 @@ def getTopTagsForArtist (artist): #artist.getTopTags
         for tag in response['toptags']['tag']:
             temp_list = []
             temp_list.append(tag['name'])
-            temp_list.append(ag['count'])
+            temp_list.append(tag['count'])
             
             result.append(temp_list)
 

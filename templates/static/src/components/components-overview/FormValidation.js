@@ -21,7 +21,7 @@ const FormValidation = ( props ) => {
   const  [token, setToken] = useState("");
 
   const clientId = "6462e55abfd5435ba392959529e6c1a7";
-  const redirectUri = "http:%2F%2Flocalhost:3000%2Fsimilar%2F";
+  const redirectUri = "http:%2F%2Flocalhost:3000%2Fdata%2F";
   const scopes = [
     "playlist-read-private",
     "playlist-modify-private",

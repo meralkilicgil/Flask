@@ -10,7 +10,7 @@ class Success extends React.Component{
   render(){
     return (
       <div className="Success">  
-        <form  action = "http://localhost:5000/success" method = "get">
+        <form  action = "http://localhost:3000/discovery" method = "get">
           <p>Your playlist has been successfully created! </p>      
         </form>  
       </div>
