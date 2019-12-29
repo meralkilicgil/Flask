@@ -43,8 +43,9 @@ def data():
     return redirect('http://localhost:3000/similar')
 
 @app.route('/success')
-def goSuccess():
-    return render_template('static/Success.html')
+def goSuccess(playlistName):
+    created= "Your playlist '" + playlistName +"' has been created successfully!"
+    return render_template('static/Success.html', created=created)
 
 @app.route('/toptracks_country', methods=['POST', 'GET'])
 def getTopTracksofCountry():
@@ -86,7 +87,8 @@ def showTopAlbumsOfTag():
         tag = request.form['tag']
         count = request.form['count']
         your_list= showTopAlbumsByTag(tag, count)
-        return render_template('static/Success.html', your_list=your_list)
+        result = "Top " + count + " albums of tag '" + tag + "'"
+        return render_template('static/Success.html', your_list=your_list, result= result)
         #return redirect('http://localhost:3000/discovery', code=301)
 
 @app.route('/discoverTrackByTag', methods=['POST', 'GET'])
@@ -96,7 +98,8 @@ def showTopTracksOfTag():
         tag = request.form['tag']
         count = request.form['count']
         your_list= showTopTracksByTag(tag, count)
-        return render_template('static/Success.html', your_list=your_list)
+        result = "Top " + count + " tracks of tag '" + tag + "'"
+        return render_template('static/Success.html', your_list=your_list, result= result)
         #return redirect('http://localhost:3000/discovery', code=301)
 
 @app.route('/discoverArtistByTag', methods=['POST', 'GET'])
@@ -106,14 +109,16 @@ def showTopArtistsOfTag():
         tag = request.form['tag']
         count = request.form['count']
         your_list= showTopArtistsByTag(tag, count)
-        return render_template('static/Success.html', your_list=your_list)
+        result = "Top " + count + " artists of tag '" + tag + "'"
+        return render_template('static/Success.html', your_list=your_list, result= result)
 
 @app.route('/discoverShowRandomTag', methods=['POST', 'GET'])
 def showRandomTagType():
     global token2
     if request.method == 'POST':
         your_list= showRandomTag()
-        return render_template('static/Success.html', your_list=your_list)
+        result = "Random tag: "
+        return render_template('static/Success.html', your_list=your_list, result= result)
         
 @app.route('/discoverTagByArtist', methods=['POST', 'GET'])
 def showTopTagsOfArtist():
@@ -121,7 +126,8 @@ def showTopTagsOfArtist():
     if request.method == 'POST':
         artist = request.form['artist']
         your_list= showTopTagsForArtist(artist)
-        return render_template('static/Success.html', your_list=your_list)
+        result = "Top tags of artist '" + artist + "'"
+        return render_template('static/Success.html', your_list=your_list, result= result)
 
 @app.route('/discoverTrackByArtist', methods=['POST', 'GET'])
 def showTopTracksOfArtist():
@@ -130,14 +136,16 @@ def showTopTracksOfArtist():
         artist = request.form['artist']
         count = request.form['count']
         your_list= showTopTracksByArtist(artist, count)
-        return render_template('static/Success.html', your_list=your_list)
+        result = "Top " + count + " tracks of artist '" + artist +"'"
+        return render_template('static/Success.html', your_list=your_list, result= result)
 
 @app.route('/discoverTopArtists', methods=['POST', 'GET'])
 def showTopArtistList():
     global token2
     if request.method == 'POST':
         your_list= showTopArtistsChart()
-        return render_template('static/Success.html', your_list=your_list)
+        result = "Top artists chart "
+        return render_template('static/Success.html', your_list=your_list, result= result)
 
 @app.route('/discoverTracksByCountry', methods=['POST', 'GET'])
 def showTopTracksOfCountry():
@@ -145,7 +153,8 @@ def showTopTracksOfCountry():
     if request.method == 'POST':
         country = request.form['country']
         your_list= showTopTracksByCountry(country)
-        return render_template('static/Success.html', your_list=your_list)     
+        result = "Top tracks of country '" + country + "'"
+        return render_template('static/Success.html', your_list=your_list, result= result)     
 
 @app.route('/discoverArtistByCountry', methods=['POST', 'GET'])
 def showTopArtistsOfCountry():
@@ -153,7 +162,8 @@ def showTopArtistsOfCountry():
     if request.method == 'POST':
         country = request.form['country']
         your_list= showTopArtistsByCountry(country)
-        return render_template('static/Success.html', your_list=your_list)   
+        result = "Top artists of country '" + country + "'"
+        return render_template('static/Success.html', your_list=your_list, result= result)   
 
 @app.route('/discoverTagInfo', methods=['POST', 'GET'])
 def printTagInfo():
@@ -161,7 +171,8 @@ def printTagInfo():
     if request.method == 'POST':
         tag = request.form['tag']
         your_list = showTagInfo(tag)
-        return render_template('static/Success.html', your_list=your_list)   
+        result = "Information about tag '" + tag + "'"
+        return render_template('static/Success.html', your_list=your_list, result= result)   
         
 reload(sys)    # to re-enable sys.setdefaultencoding()
 #sys.setdefaultencoding('utf-8')
@@ -176,7 +187,7 @@ lastFMUserName = config.get('Last.FM', 'UserName')
 redirect_uri = config.get('Spotify', 'redirect-uri')
 
 
-def getSimilar(artist, track, count = 20, playlistName = None):
+def getSimilar(artist, track, count, playlistName):
     
     print ("%s similar tracks to %s" % (count, track))
     result = lastFM.getSimilar(artist = artist, track = track, limit = count)
@@ -187,7 +198,7 @@ def getSimilar(artist, track, count = 20, playlistName = None):
 
         track_IDs = getTrackIDs(result)
         generatePlaylist(track_IDs, playlistName)
-        return goSuccess()
+        return goSuccess(playlistName)
 
 
 def getUserTopTracks(lastFMUserName = lastFMUserName, period = "1month", count = 20, playlistName = None):
@@ -218,7 +229,7 @@ def getUserLovedTracks(lastFMUserName = lastFMUserName, playlistName = None):
 
 
 
-def getTopTracksByCountry(country, count = 50, playlistName = None):
+def getTopTracksByCountry(country, count, playlistName):
    
     print ("%s Top %s" % (country, count))
     result = lastFM.getGeoTopTracks(country = country, limit = count)
@@ -229,9 +240,9 @@ def getTopTracksByCountry(country, count = 50, playlistName = None):
         
         track_IDs = getTrackIDs(result)
         generatePlaylist (track_IDs, playlistName)
-        return goSuccess()
+        return goSuccess(playlistName)
 
-def getTopTracksByArtist(artist, count = 20, playlistName = None):
+def getTopTracksByArtist(artist, count, playlistName):
     
     print ("The best %s songs" % artist.capitalize())
     result = lastFM.getArtistTopTracks(artist = artist, limit = count)
@@ -242,10 +253,10 @@ def getTopTracksByArtist(artist, count = 20, playlistName = None):
 
         track_IDs = getTrackIDs(result)
         generatePlaylist (track_IDs, playlistName)
-        return goSuccess()
+        return goSuccess(playlistName)
 
 
-def getTopTracksByTag (tag, count = 25, playlistName = None):
+def getTopTracksByTag (tag, count, playlistName):
 
     print ("Top %s Songs" % (tag))
     result = lastFM.getTopTracksByTag(tag = tag, limit = count)
@@ -256,7 +267,7 @@ def getTopTracksByTag (tag, count = 25, playlistName = None):
         
         track_IDs = getTrackIDs(result)
         generatePlaylist (track_IDs, playlistName)
-        return goSuccess()
+        return goSuccess(playlistName)
 
 
 def getUserTopAlbums(lastFMUserName = lastFMUserName, count = 10, period = '3month', playlistName = None):
@@ -272,7 +283,7 @@ def getUserTopAlbums(lastFMUserName = lastFMUserName, count = 10, period = '3mon
         generatePlaylist(track_IDs, playlistName)
 
 
-def getTopTracksChart (count = 25, playlistName = None):
+def getTopTracksChart (count, playlistName):
     
     print ("Top Songs by Last.FM")
     result = lastFM.getChartTopTracks(limit = count)
@@ -283,10 +294,10 @@ def getTopTracksChart (count = 25, playlistName = None):
         
         track_IDs = getTrackIDs(result)
         generatePlaylist (track_IDs, playlistName)
-        return goSuccess()
+        return goSuccess(playlistName)
 
 
-def getTopAlbumsByTag (tag, count = 10, playlistName = None):
+def getTopAlbumsByTag (tag, count, playlistName):
     print ("Top {0} albums".format(tag))
     result = lastFM.getTopAlbumsByTag(tag = tag, limit = count)
 
@@ -296,7 +307,7 @@ def getTopAlbumsByTag (tag, count = 10, playlistName = None):
 
         track_IDs = getTrackIDsFromAlbum(getAlbumIDs(result))
         generatePlaylist(track_IDs, playlistName)
-        return goSuccess()
+        return goSuccess(playlistName)
 
 
 def showTopTagsForArtist (artist):
@@ -642,7 +653,7 @@ def generatePlaylist(track_IDs, playlistName):
                         sp.user_playlist_add_tracks(username, playlist.get('id'), track_IDs[i*100:(i+1)*100])
                         i += 1
                 print (playlistName + " has been created successfully...")
-                return goSuccess()
+                return goSuccess(playlistName)
 
         else:
             print("Can't get token for ", username)

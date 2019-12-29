@@ -11,15 +11,80 @@
       margin-top: 80px;
     }
 
+    .tabsSelection{
+      display: inline-block;
+    }
+
+    .tabSelect{
+      padding: 10px !important;
+    }
+
     .Discovery .selection{
       display: inline-block;
-      float: left;
-      margin-left: 280px;
-      margin-top: 80px;
+      margin-left: 80px;
+      margin-top: 50px;
+      width: 300px;
     }
 
     .Discovery form {
       margin: 0 auto;
       max-width: 320px;
     }
+
+    .byValueSelection{
+      margin: auto;
+      padding-left: 5%;
+    }
+
+    .Discovery Button{
+      margin: 20px;
+      height: 40px;
+      width: 80px;
+    }
+
+    .Discovery .submitDiscovery{
+      margin: 10px;
+      height: 40px;
+      margin-left: 100px;
+      width: 80px;
+      will-change: background-color,box-shadow,color;
+      -webkit-transition: box-shadow .2s ease,color .2s ease,background-color .2s ease;
+      transition: box-shadow .2s ease,color .2s ease,background-color .2s ease;
+      text-overflow: ellipsis;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+    }
+    .menubar{
+      overflow-y: hidden;
+      overflow-x: auto;
+      height: 80%;
+      width: 70%;
+    }
+
+    .Discovery h1{
+      padding-left: 10%;
+    }
+    
+    .menu{
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 15%;
+      margin-bottom: 0;
+      list-style: none;
+    }
+    .menuitem{
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+      will-change: background-color,box-shadow,color;
+      -webkit-transition: box-shadow .2s ease,color .2s ease,background-color .2s ease;
+      transition: box-shadow .2s ease,color .2s ease,background-color .2s ease;
+      font-size: .85rem;
+      border-bottom: 1px solid #e1e5eb;
+      font-weight: 300;
+      color: #3d5170;
+      padding: .9375rem 1.5625rem;
+    }
+    
   }

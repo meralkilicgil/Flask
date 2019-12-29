@@ -44,12 +44,14 @@ class Discovery extends React.Component {
   render() {
     return (
       <div className="Discovery">
-        <h1>Filter</h1>
-        <div>
-          <Button value="byTag" onClick={this.handleByValue}>Tag</Button>
-          <Button value="byArtist" onClick={this.handleByValue}>Artist</Button>
-          <Button value="byCountry" onClick={this.handleByValue}>Country</Button>
-          <Button value="TagInfo" onClick={this.handleByValue}>Get Info</Button>
+        <h1>Discovery</h1>
+        <div className="tabsSelection menubar">
+        <ul className="menu">
+          <li className="menuitem"><Button value="byTag" onClick={this.handleByValue}>Tag</Button></li>
+          <li className="menuitem"><Button value="byArtist" onClick={this.handleByValue}>Artist</Button></li>
+          <li className="menuitem"><Button value="byCountry" onClick={this.handleByValue}>Country</Button></li>
+          <li className="menuitem"><Button value="TagInfo" onClick={this.handleByValue}>Get Info</Button></li>
+        </ul>
         </div>
 
         <div className="byValueSelection">
@@ -72,7 +74,7 @@ class Discovery extends React.Component {
                       <form action={`http://localhost:5000/discover${this.state.value}`} method="post">
                         <FormLabel>Tag <FormControl autoFocus type="text" name="tag"></FormControl> </FormLabel>
                         <FormLabel>Count <FormControl autoFocus type="text" name="count"></FormControl></FormLabel>
-                        <Button block type="submit">Show </Button>
+                        <Button block type="submit" className="submitDiscovery">Show </Button>
                       </form>
                     </div>
                   </div>
@@ -94,7 +96,7 @@ class Discovery extends React.Component {
                       <form action={`http://localhost:5000/discover${this.state.value}`} method="post">
                         <FormLabel>Artist <FormControl autoFocus type="text" name="artist"></FormControl> </FormLabel>
                         <FormLabel>Count <FormControl autoFocus type="text" name="count"></FormControl></FormLabel>
-                        <Button block type="submit">Show </Button>
+                        <Button block type="submit" className="submitDiscovery">Show </Button>
                       </form>
                     </div>
                   </div>
@@ -114,7 +116,7 @@ class Discovery extends React.Component {
                       </InputGroup>
                       <form action={`http://localhost:5000/discover${this.state.value}`} method="post">
                         <FormLabel>Country <FormControl autoFocus type="text" name="country"></FormControl> </FormLabel>
-                        <Button block type="submit">Show </Button>
+                        <Button block type="submit" className="submitDiscovery">Show </Button>
                       </form>
                     </div>
                   </div>
@@ -127,7 +129,7 @@ class Discovery extends React.Component {
                       <h4>Get info about tag</h4>
                       <form action={`http://localhost:5000/discover${this.state.parentValue}`} method="post">
                         <FormLabel>Tag <FormControl autoFocus type="text" name="tag"></FormControl> </FormLabel>
-                        <Button block type="submit">Show </Button>
+                        <Button block type="submit" className="submitDiscovery">Show </Button>
                       </form>
                     </div>
                   </div>

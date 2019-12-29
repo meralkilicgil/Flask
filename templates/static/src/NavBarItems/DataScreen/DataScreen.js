@@ -108,7 +108,7 @@ const DataInfo = ({ smallStats }) => {
   return (
     <div>
         <form action= {urlkey} method="POST">
-            <h2>Redirecting</h2>
+            <h3>Redirecting...</h3>
         
         </form>
     </div>

@@ -105,19 +105,20 @@ const MakeSimilar = ({ smallStats }) => {
   let urlkey = `http://localhost:5000/create?${usernameToken}?${token}`
   return (
     <div className="MakeSimilar">
-      <h2>Choose your selection to create playlist</h2>
-        <div className="selection">
+        <h3>Create Playlist</h3>
+        <div className="selection column side">
+          <h4>Create your playlist based on: </h4>
           <InputGroup className="mb-3">
             <FormSelect onChange={handleChange}>
-              <option value='0'>Choose Playlist Credentials</option>
-              <option value='1'>Make Similar Playlist</option>
-              <option value='2'>Get From Artist</option>
-              <option value='3'>Get From Country</option>
-              <option value='4'>Get From Tag</option>
+              <option value='0' className="credential">Choose Playlist Credentials</option>
+              <option value='1' className="credential">Songs of artists</option>
+              <option value='2' className="credential">Artist</option>
+              <option value='3' className="credential">Country</option>
+              <option value='4' className="credential">Tag</option>
             </FormSelect>
           </InputGroup>
         </div>
-        <div className="tabs">
+        <div className="tabs column middle">
           {(() => {
             switch (tab.value) {
               case '0':
@@ -125,11 +126,11 @@ const MakeSimilar = ({ smallStats }) => {
                 urlkey = `http://localhost:5000/create?${usernameToken}?${token}`
                 return (
                   <form action={urlkey} method="post">
-                    <h2>Create Similar Playlist </h2>
-                    <FormLabel>Artist <FormControl autoFocus type="text" name="artist"></FormControl> </FormLabel>
-                    <FormLabel>Song<FormControl autoFocus type="text" name="track"></FormControl> </FormLabel>
-                    <FormLabel>Count <FormControl autoFocus type="text" name="count"></FormControl></FormLabel>
-                    <FormLabel>Playlist Name <FormControl autoFocus type="text" name="plName"></FormControl></FormLabel>
+                    <h4>Create Similar Playlist </h4>
+                    <FormLabel>Artist  </FormLabel><FormControl autoFocus type="text" name="artist" className="label"></FormControl>
+                    <FormLabel>Song </FormLabel><FormControl autoFocus type="text" name="track" className="label"></FormControl>
+                    <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
+                    <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
                     <Button block type="submit">Create </Button>
                   </form>
                 );
@@ -139,10 +140,10 @@ const MakeSimilar = ({ smallStats }) => {
                 return (
                   <div className="artist">
                     <form action={urlkey} method="post">
-                      <h2>Top Tracks of Artist</h2>
-                      <FormLabel>Artist<FormControl autoFocus type="text" name="artist"></FormControl> </FormLabel>
-                      <FormLabel>Count <FormControl autoFocus type="text" name="count"></FormControl></FormLabel>
-                      <FormLabel>Playlist Name <FormControl autoFocus type="text" name="plName"></FormControl></FormLabel>
+                      <h4>Top Tracks of Artist</h4>
+                      <FormLabel>Artist </FormLabel><FormControl autoFocus type="text" name="artist" className="label"></FormControl>
+                      <FormLabel>Count  </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
+                      <FormLabel>Playlist Name  </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
                       <Button block type="submit">Create </Button>
                     </form>
                   </div>
@@ -153,10 +154,10 @@ const MakeSimilar = ({ smallStats }) => {
                 return (
                   <div className="country">
                     <form action={urlkey} method="post">
-                      <h2>Country Top Tracks</h2>
-                      <FormLabel>Country<FormControl autoFocus type="text" name="country"></FormControl> </FormLabel>
-                      <FormLabel>Count <FormControl autoFocus type="text" name="count"></FormControl></FormLabel>
-                      <FormLabel>Playlist Name <FormControl autoFocus type="text" name="plName"></FormControl></FormLabel>
+                      <h4>Country Top Tracks</h4>
+                      <FormLabel>Country</FormLabel><FormControl autoFocus type="text" name="country" className="label"></FormControl>
+                      <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
+                      <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
                       <Button block type="submit">Create </Button>
                     </form>
                   </div>
@@ -167,10 +168,10 @@ const MakeSimilar = ({ smallStats }) => {
                 return (
                   <div className="tag">
                     <form action={urlkey} method="post">
-                      <h2>Top Tracks of Genre</h2>
-                      <FormLabel>Genre<FormControl autoFocus type="text" name="tag"></FormControl> </FormLabel>
-                      <FormLabel>Count <FormControl autoFocus type="text" name="count"></FormControl></FormLabel>
-                      <FormLabel>Playlist Name <FormControl autoFocus type="text" name="plName"></FormControl></FormLabel>
+                      <h4>Top Tracks of Taf</h4>
+                      <FormLabel>Tag</FormLabel><FormControl autoFocus type="text" name="tag" className="label"></FormControl>
+                      <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
+                      <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
                       <Button block type="submit">Create </Button>
                     </form>
                   </div>
