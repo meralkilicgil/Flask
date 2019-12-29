@@ -13,10 +13,20 @@ import fire
 from importlib import reload
 import os
 from urllib.parse import urlsplit, urlunsplit
+from random import randrange
+
 from flask import Flask, redirect, url_for, request, render_template
 app = Flask(__name__)
 global token2
 
+artistsList = []
+infile = open('artists.txt', 'r')
+for line in infile:
+    artistsList.append(line.strip().split(','))
+
+infile.close()
+ 
+genresList = ["rock","alternative","classic rock","classical","jazz","blues","classical rock","oldies","progressive rock","hard rock","rap","hip-hop","dance","electronica","indie rock","folk","soul","funk","soundtracks","thrash metal","punk rock","grunge","country","reggae","power metal","blues rock","post punk","r&b","new wawe","classical crossover","psychedelic rock","symphonic metal","glam rock","big band","black metal","pop","disco","opera","techno","hardcore","death metal","acoustic rock","folk metal","bluegrass","drum and bass","house","garage rock","britpop","soul","melodic death metal","religious","art rock","celtic","swing","synth pop","post-rock","latin","soft rock","symphonic rock","tango"]
 
 @app.route('/')
 def index():
@@ -172,10 +182,21 @@ def printTagInfo():
         tag = request.form['tag']
         your_list = showTagInfo(tag)
         result = "Information about tag '" + tag + "'"
-        return render_template('static/Success.html', your_list=your_list, result= result)   
+        return render_template('static/Success.html', your_list=your_list, result= result)  
+
+@app.route('/feellucky', methods=['POST', 'GET'])
+def feelLucky():
+    global token2
+    if request.method == 'POST':       
+        tag = genresList[randrange(len(genresList))]
+        count = 20
+        name = "Your 'Feel Lucky' list based on genre " + tag
+        return getTopTracksByTag(tag, count, name) 
         
 reload(sys)    # to re-enable sys.setdefaultencoding()
 #sys.setdefaultencoding('utf-8')
+
+
 
 config = configparser.RawConfigParser()
 config.read('config.ini')

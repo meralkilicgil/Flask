@@ -1,60 +1,63 @@
 @media all and (min-width: 480px) {
-    .MakeSimilar {
-      padding: 50px 0;
-      text-align: center;
-    }
-
-    .column{
-      float: left;
-    }
-
-    .column.side{
-      padding-left: 8%;
-      padding-right: 10%;
-      width: 40%;
-      position: relative;
-      flex-direction: column!important;
-      
-    }
-
-    .column.middle{
-      width: 26%;
-      position: relative;
-    }
-
-    .credential{
-      text-align-last:center;
-    }
-  
-    .MakeSimilar form {
-      margin: 0 auto;
-      max-width: 320px;
-    }    
-
-    .MakeSimilar Button{
-      margin: 20px 35%;
-      height: 40px;
-      width: 80px;
-    }
-
-    .MakeSimilar .label{
-      width: 250px;
-      margin: 10px 10%;
-    }
-
-    .MakeSimilar .selection{
-      display: inline-block;
-      float: left;
-      margin-left: 15%;
-      margin-top: 50px;
-    }
-
-    .MakeSimilar .tabs{
-      display: inline-block;
-      float: left;
-      margin-right: 15%;
-      margin-top: 50px;
-
-    }
+  .MakeSimilar {
+    padding: 50px 0;
+    padding-left: 24%;
+    text-align: center;
   }
-  
+
+  .column{
+    float: left;
+  }
+
+  .column.side{
+    padding-left: 8%;
+    padding-right: 10%;
+    width: 40%;
+    position: relative;
+    flex-direction: column!important;
+    
+  }
+
+  .column.middle{
+    width: 25%;
+    position: relative;
+  }
+
+  .credential{
+    text-align-last:center;
+  }
+
+  .MakeSimilar form {
+    margin: 0 auto;
+    max-width: 350px;
+  }    
+
+  .MakeSimilar Button{
+    margin: 20px 35%;
+    height: 40px;
+    width: 80px;
+  }
+
+  .MakeSimilar .label{
+    width: 250px;
+    margin: 10px 10%;
+  }
+
+  .MakeSimilar .selection{
+    display: inline-block;
+    float: left;
+    margin-top: 50px;
+  }
+
+  .MakeSimilar .tabs{
+    display: inline-block;
+    float: left;
+    margin-right: 15%;
+    margin-top: 50px;
+
+  }
+  .HeaderMain{
+    width: 70%;
+  }
+
+}

@@ -45,7 +45,7 @@
     .Discovery .submitDiscovery{
       margin: 10px;
       height: 40px;
-      margin-left: 100px;
+      margin-left: 35%;
       width: 80px;
       will-change: background-color,box-shadow,color;
       -webkit-transition: box-shadow .2s ease,color .2s ease,background-color .2s ease;

@@ -7,6 +7,7 @@ import MakeSimilar from './NavBarItems/MakeSimilar/MakeSimilar';
 import TopTracks from './NavBarItems/TopTracks/TopTracks';
 import Discovery from './NavBarItems/Discovery/Discovery';
 import DataInfo from './NavBarItems/DataScreen/DataScreen';
+import FeelLucky from './NavBarItems/FeelLucky/FeelLucky';
 import routes from "./routes";
 import withTracker from "./withTracker";
 
@@ -29,6 +30,7 @@ class App extends React.Component {
                   <li className="navitem"><Link to="/" className="navlink">Login</Link></li>
                   <li className="navitem"><Link to="/similar" className="navlink">Create Playlists</Link></li>
                   <li className="navitem"><Link to="/discovery" className="navlink">Discovery</Link></li>
+                  <li className="navitem"><Link to="/feellucky" className="navlink">Feel Lucky</Link></li>
                 </ul>
               </div>
             </aside>
@@ -37,6 +39,7 @@ class App extends React.Component {
               <Route path="/similar"><MakeSimilar /></Route>
               <Route path="/discovery"> <Discovery /></Route>
               <Route path="/data"><DataInfo /></Route>
+              <Route path="/feellucky"><FeelLucky /></Route>
             </Switch>
           </div>
         </Router>

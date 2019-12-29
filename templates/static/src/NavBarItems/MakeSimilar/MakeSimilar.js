@@ -105,7 +105,7 @@ const MakeSimilar = ({ smallStats }) => {
   let urlkey = `http://localhost:5000/create?${usernameToken}?${token}`
   return (
     <div className="MakeSimilar">
-        <h3>Create Playlist</h3>
+        <h3 className="HeaderMain">Create Playlist</h3>
         <div className="selection column side">
           <h4>Create your playlist based on: </h4>
           <InputGroup className="mb-3">
@@ -168,7 +168,7 @@ const MakeSimilar = ({ smallStats }) => {
                 return (
                   <div className="tag">
                     <form action={urlkey} method="post">
-                      <h4>Top Tracks of Taf</h4>
+                      <h4>Top Tracks of Tag</h4>
                       <FormLabel>Tag</FormLabel><FormControl autoFocus type="text" name="tag" className="label"></FormControl>
                       <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
                       <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
