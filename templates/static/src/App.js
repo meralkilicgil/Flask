@@ -10,30 +10,40 @@ import DataInfo from './NavBarItems/DataScreen/DataScreen';
 import FeelLucky from './NavBarItems/FeelLucky/FeelLucky';
 import routes from "./routes";
 import withTracker from "./withTracker";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
+import UserActions from './NavBarItems/UserActions/UserActions';
+import { Nav } from "shards-react";
+import { Container, Navbar } from "shards-react";
 class App extends React.Component {
 
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
       <div className="App">
         <Router>
           <div>
             <aside className="mainsidebar">
-              <div className="navbar">
-                <ul className="nav">
-                  <li className="navitem"><Link to="/" className="navlink">Login</Link></li>
-                  <li className="navitem"><Link to="/similar" className="navlink">Create Playlists</Link></li>
-                  <li className="navitem"><Link to="/discovery" className="navlink">Discovery</Link></li>
-                  <li className="navitem"><Link to="/feellucky" className="navlink">Feel Lucky</Link></li>
+              <div className="navbar-side">
+                <ul className="nav-side">
+                  <Link to="/" className="navlink"><li className="navitem-side">Login</li></Link>
+                  <Link to="/similar" className="navlink"><li className="navitem">Create Playlists</li></Link>
+                  <Link to="/discovery" className="navlink"><li className="navitem">Discovery</li></Link>
+                  <Link to="/feellucky" className="navlink"><li className="navitem">Feel Lucky</li></Link>
                 </ul>
               </div>
             </aside>
+            <div className="header">
+              <Container>
+                <Navbar type="light" className="align-items-stretch flex-md-nowrap p-0">
+                  <Nav navbar className="border-left flex-row">
+                    <UserActions />
+                  </Nav>
+                </Navbar>
+              </Container>
+            </div>
             <Switch>
               <Route exact path="/"><Login /> </Route>
               <Route path="/similar"><MakeSimilar /></Route>

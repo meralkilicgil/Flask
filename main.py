@@ -19,15 +19,9 @@ from flask import Flask, redirect, url_for, request, render_template
 app = Flask(__name__)
 global token2
 
-artistsList = []
-infile = open('artists.txt', 'r')
-for line in infile:
-    artistsList.append(line.strip().split(','))
-
-infile.close()
- 
+artistsList = ["Ed Sheeran","Post Malone","Camila Cabello","J Balvin","Ariana Grande","Khalid","Justin Bieber","Billie Eilish","Maroon 5","Shawn Mendes","Drake","Sam Smith","Selena Gomez","Daddy Yankee","Dua Lipa","Coldplay","Marshmello","Taylor Swift","Diplo","Nicki Minaj","The Weeknd","The Chainsmokers","Tones and I","Halsey","Travis Scott","Bad Bunny","Mariah Carey","David Guetta","Cardi B","Kanye West","Lewis Capaldi","Ozuna","Imagine Dragons","Swae Lee","Juice WRLD","Rihanna","Calvin Harris","Sia","Tyga","Bruno Mars","Black Eyed Peas","Eminem","DJ Snake","Lauv","Katy Perry","Zayn","Farruko","Lady Gaga","Chris Brown"]
 genresList = ["rock","alternative","classic rock","classical","jazz","blues","classical rock","oldies","progressive rock","hard rock","rap","hip-hop","dance","electronica","indie rock","folk","soul","funk","soundtracks","thrash metal","punk rock","grunge","country","reggae","power metal","blues rock","post punk","r&b","new wawe","classical crossover","psychedelic rock","symphonic metal","glam rock","big band","black metal","pop","disco","opera","techno","hardcore","death metal","acoustic rock","folk metal","bluegrass","drum and bass","house","garage rock","britpop","soul","melodic death metal","religious","art rock","celtic","swing","synth pop","post-rock","latin","soft rock","symphonic rock","tango"]
-
+countryList =["Armenia","Australia","Austria","Belgium","Brazil","Canada","China","Denmark","France","Germany","Greece","Iceland","Italy","Japan","Korea South","Luxembourg","Mexico","Netherlands","Norway","Poland","Portugal","Romania","Russia","Serbia","Slovakia","Slovenia","Spain","Sweden","Switzerland","Turkey","Ukraine","United Arab Emirates","United Kingdom","United States"]
 @app.route('/')
 def index():
     return render_template('static/src/App.js')
@@ -184,15 +178,33 @@ def printTagInfo():
         result = "Information about tag '" + tag + "'"
         return render_template('static/Success.html', your_list=your_list, result= result)  
 
-@app.route('/feellucky', methods=['POST', 'GET'])
+@app.route('/feellucky_tag', methods=['POST', 'GET'])
 def feelLucky():
     global token2
     if request.method == 'POST':       
         tag = genresList[randrange(len(genresList))]
         count = 20
-        name = "Your 'Feel Lucky' list based on genre " + tag
+        name = "Feel lucky: " + tag
         return getTopTracksByTag(tag, count, name) 
         
+@app.route('/feellucky_artist', methods=['POST', 'GET'])
+def feelLuckyArtist():
+    global token2
+    if request.method == 'POST':       
+        artist = artistsList[randrange(len(artistsList))]
+        count = 20
+        name = "Feel lucky: " + artist
+        return getTopTracksByArtist(artist, count, name)
+
+@app.route('/feellucky_country', methods=['POST', 'GET'])
+def feelLuckyCountry():
+    global token2
+    if request.method == 'POST':       
+        country = countryList[randrange(len(countryList))]
+        count = 20
+        name = "Feel lucky: " + country
+        return getTopTracksByCountry(country, count, name)
+
 reload(sys)    # to re-enable sys.setdefaultencoding()
 #sys.setdefaultencoding('utf-8')
 

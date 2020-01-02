@@ -23,6 +23,7 @@ import {
   InputGroupText,
   FormSelect
 } from "shards-react";
+import UserActions from "./../UserActions/UserActions";
 
 const fs = require('fs')
 
@@ -48,6 +49,7 @@ const MakeSimilar = ({ smallStats }) => {
       // Set token
       setToken(_token);
     }
+    
   }
   const handleChange = (e) => {
     setTab({
@@ -93,7 +95,7 @@ const MakeSimilar = ({ smallStats }) => {
       });
     console.log(successData);
   }
-
+  
   componentDidMount();
   window.location.hash = "";
   console.log(`Token before ${token}`)
@@ -101,87 +103,96 @@ const MakeSimilar = ({ smallStats }) => {
     getData(token);
   })
 
+  var topArtistList = JSON.parse(window.localStorage.getItem("artistList"));
+  var profilePic = JSON.parse(window.localStorage.getItem("profilePic"));
+  const logout = () => {
+    setToken();
+    setUserNameToken("");
+  }
+  console.log("PIC")
+  console.log(profilePic)
   console.log(2)
   let urlkey = `http://localhost:5000/create?${usernameToken}?${token}`
   return (
     <div className="MakeSimilar">
-        <h3 className="HeaderMain">Create Playlist</h3>
-        <div className="selection column side">
-          <h4>Create your playlist based on: </h4>
-          <InputGroup className="mb-3">
-            <FormSelect onChange={handleChange}>
-              <option value='0' className="credential">Choose Playlist Credentials</option>
-              <option value='1' className="credential">Songs of artists</option>
-              <option value='2' className="credential">Artist</option>
-              <option value='3' className="credential">Country</option>
-              <option value='4' className="credential">Tag</option>
-            </FormSelect>
-          </InputGroup>
-        </div>
-        <div className="tabs column middle">
-          {(() => {
-            switch (tab.value) {
-              case '0':
-              case '1':
-                urlkey = `http://localhost:5000/create?${usernameToken}?${token}`
-                return (
+     {/*  <img class="user-avatar rounded-circle mr-2" src={profilePic} alt="User Avatar" /> */}
+      <h3 className="HeaderMain">Create Playlist</h3>
+      <div className="selection column side">
+        <h4>Create your playlist based on: </h4>
+        <InputGroup className="mb-3">
+          <FormSelect onChange={handleChange}>
+            <option value='0' className="credential">Choose Playlist Credentials</option>
+            <option value='1' className="credential">Songs of artists</option>
+            <option value='2' className="credential">Artist</option>
+            <option value='3' className="credential">Country</option>
+            <option value='4' className="credential">Tag</option>
+          </FormSelect>
+        </InputGroup>
+      </div>
+      <div className="tabs column middle">
+        {(() => {
+          switch (tab.value) {
+            case '0':
+            case '1':
+              urlkey = `http://localhost:5000/create?${usernameToken}?${token}`
+              return (
+                <form action={urlkey} method="post">
+                  <h4>Create Similar Playlist </h4>
+                  <FormLabel>Artist  </FormLabel><FormControl autoFocus type="text" name="artist" className="label"></FormControl>
+                  <FormLabel>Song </FormLabel><FormControl autoFocus type="text" name="track" className="label"></FormControl>
+                  <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
+                  <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
+                  <Button block type="submit">Create </Button>
+                </form>
+              );
+              break;
+            case '2':
+              urlkey = `http://localhost:5000/toptracks_artist?${usernameToken}?${token}`
+              return (
+                <div className="artist">
                   <form action={urlkey} method="post">
-                    <h4>Create Similar Playlist </h4>
-                    <FormLabel>Artist  </FormLabel><FormControl autoFocus type="text" name="artist" className="label"></FormControl>
-                    <FormLabel>Song </FormLabel><FormControl autoFocus type="text" name="track" className="label"></FormControl>
+                    <h4>Top Tracks of Artist</h4>
+                    <FormLabel>Artist </FormLabel><FormControl autoFocus type="text" name="artist" className="label"></FormControl>
+                    <FormLabel>Count  </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
+                    <FormLabel>Playlist Name  </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
+                    <Button block type="submit">Create </Button>
+                  </form>
+                </div>
+              );
+              break;
+            case '3':
+              urlkey = `http://localhost:5000/toptracks_country?${usernameToken}?${token}`
+              return (
+                <div className="country">
+                  <form action={urlkey} method="post">
+                    <h4>Country Top Tracks</h4>
+                    <FormLabel>Country</FormLabel><FormControl autoFocus type="text" name="country" className="label"></FormControl>
                     <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
                     <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
                     <Button block type="submit">Create </Button>
                   </form>
-                );
-                break;
-              case '2':
-                urlkey = `http://localhost:5000/toptracks_artist?${usernameToken}?${token}`
-                return (
-                  <div className="artist">
-                    <form action={urlkey} method="post">
-                      <h4>Top Tracks of Artist</h4>
-                      <FormLabel>Artist </FormLabel><FormControl autoFocus type="text" name="artist" className="label"></FormControl>
-                      <FormLabel>Count  </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
-                      <FormLabel>Playlist Name  </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
-                      <Button block type="submit">Create </Button>
-                    </form>
-                  </div>
-                );
-                break;
-              case '3':
-                urlkey = `http://localhost:5000/toptracks_country?${usernameToken}?${token}`
-                return (
-                  <div className="country">
-                    <form action={urlkey} method="post">
-                      <h4>Country Top Tracks</h4>
-                      <FormLabel>Country</FormLabel><FormControl autoFocus type="text" name="country" className="label"></FormControl>
-                      <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
-                      <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
-                      <Button block type="submit">Create </Button>
-                    </form>
-                  </div>
-                );
-                break;
-              case '4':
-                urlkey = `http://localhost:5000/toptracks_tag?${usernameToken}?${token}`
-                return (
-                  <div className="tag">
-                    <form action={urlkey} method="post">
-                      <h4>Top Tracks of Tag</h4>
-                      <FormLabel>Tag</FormLabel><FormControl autoFocus type="text" name="tag" className="label"></FormControl>
-                      <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
-                      <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
-                      <Button block type="submit">Create </Button>
-                    </form>
-                  </div>
-                );
-                break;
-              default:
-                return null;
-            }
-          })()}
-        </div>
+                </div>
+              );
+              break;
+            case '4':
+              urlkey = `http://localhost:5000/toptracks_tag?${usernameToken}?${token}`
+              return (
+                <div className="tag">
+                  <form action={urlkey} method="post">
+                    <h4>Top Tracks of Tag</h4>
+                    <FormLabel>Tag</FormLabel><FormControl autoFocus type="text" name="tag" className="label"></FormControl>
+                    <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
+                    <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
+                    <Button block type="submit">Create </Button>
+                  </form>
+                </div>
+              );
+              break;
+            default:
+              return null;
+          }
+        })()}
+      </div>
     </div>
   );
 }

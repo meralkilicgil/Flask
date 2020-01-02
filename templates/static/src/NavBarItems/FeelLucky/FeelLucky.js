@@ -102,10 +102,55 @@ const FeelLucky = ({ smallStats }) => {
     let urlkey = `http://localhost:5000/feellucky?${usernameToken}?${token}`
     return (
         <div className="FeelLucky">
+            <div className="selection column side">
             <h3>Create Random playlist</h3>
-            <form action={urlkey} method="post">
-                <Button block type="submit" className="submitLucky">Create </Button>
-            </form>
+            <InputGroup className="mb-3">
+            <FormSelect onChange={handleChange}>
+              <option value='0' className="credential">Choose Random Type</option>
+              <option value='1' className="credential">Tag</option>
+              <option value='2' className="credential">Artist</option>
+              <option value='3' className="credential">Country</option>
+            </FormSelect>
+          </InputGroup></div>
+          <div className="tabs column middle">
+          {(() => {
+            switch (tab.value) {
+              case '0':
+              case '1':
+                urlkey = `http://localhost:5000/feellucky_tag?${usernameToken}?${token}`
+                return (
+                  <form action={urlkey} method="post">
+                    <h4>Create Random Tag Playlist </h4>
+                    <Button block type="submit">Create </Button>
+                  </form>
+                );
+                break;
+              case '2':
+                urlkey = `http://localhost:5000/feellucky_artist?${usernameToken}?${token}`
+                return (
+                  <div className="artist">
+                    <form action={urlkey} method="post">
+                      <h4>Create Random Artist Playlist</h4>
+                      <Button block type="submit">Create </Button>
+                    </form>
+                  </div>
+                );
+                break;
+              case '3':
+                urlkey = `http://localhost:5000/feellucky_country?${usernameToken}?${token}`
+                return (
+                  <div className="country">
+                    <form action={urlkey} method="post">
+                      <h4>Create Random Country Playlist </h4>
+                      <Button block type="submit">Create </Button>
+                    </form>
+                  </div>
+                );
+                break;
+              default:
+                return null;
+            }
+          })()}</div>
         </div>
     );
 }

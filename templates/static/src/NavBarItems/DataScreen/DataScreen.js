@@ -82,6 +82,14 @@ const DataInfo = ({ smallStats }) => {
         //window.location.href = `http://localhost:3000/callback?${data.data.display_name}?${token}`;
 
         setUserNameToken(data.data.display_name)
+        console.log("Data listed below ")
+        let pictureUrlOfProfile = data.data.images[0].url
+        //let spotifyUserName = data
+        window.localStorage.setItem("profilePic", JSON.stringify(pictureUrlOfProfile));
+        window.localStorage.setItem("userName", JSON.stringify(data.data.display_name))
+        console.log("User name is : " + data.data.display_name)
+        console.log(pictureUrlOfProfile)
+        console.log(data)
         //setState({
         //...successData,
         //[data.data.items.name ] : data.data.items.popularity
@@ -93,11 +101,30 @@ const DataInfo = ({ smallStats }) => {
       });
     console.log(successData);
   }
+  const getUserTopGenres = (token) => {
 
+    axios.interceptors.request.use(function (config) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+      return config;
+    }, function (error) {
+      return Promise.reject(error);
+    });
+
+    axios.get("https://api.spotify.com/v1/me/top/artists")
+      .then((data) => {
+        console.log("Top artist listed below ")
+        console.log(data.data.items)
+        window.localStorage.setItem("artistList", JSON.stringify(data.data.items));
+      }).catch(function (error) {
+        console.log(error);
+      });
+
+  }
   componentDidMount();
   window.location.hash = "";
   console.log(`Token before ${token}`)
   useEffect(() => {
+    getUserTopGenres(token);
     getData(token);
   })
 
@@ -107,10 +134,10 @@ const DataInfo = ({ smallStats }) => {
 
   return (
     <div>
-        <form action= {urlkey} method="POST">
-            <h3>Redirecting...</h3>
-        
-        </form>
+      <form action={urlkey} method="POST">
+        <h3>Redirecting...</h3>
+
+      </form>
     </div>
   );
 };

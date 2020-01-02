@@ -26,12 +26,6 @@ export default function Login(props) {
 
   return (
     <div className="Login">
-      <Container fluid className="px-0">
-        <Alert className="mb-0">
-          <i className="fa fa-info mx-2"></i> Should enter credentials to continue
-        </Alert>
-      </Container>
-
     <Container fluid className="main-content-container px-4">
       <Row noGutters className="page-header py-4">
         <PageTitle
@@ -60,7 +54,11 @@ export default function Login(props) {
           </Col>
         </Row>
       </Container>
-
+      <Container fluid className="px-0">
+        <Alert className="mb-0">
+          <i className="fa fa-info mx-2"></i> Should enter credentials to continue
+        </Alert>
+      </Container>
     </div>
   );
 }
