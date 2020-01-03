@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<title>{{result}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    input[type="submit"] {
+        display: inline-block;
+        padding: 0.46em 1.6em;
+        border: 0.1em #000000;
+        margin: 0.5em 0.2em 0.5em 0;
+        border-radius: 0.12em;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        color: black;
+        text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+        background-color: rgb(104, 171, 226);
+        text-align: center;
+        transition: background-color .3s,
+            opacity .5s, visibility .5s;
+        z-index: 1000;
+    }
+
+    input[type="submit"]:hover {
+        text-shadow: 0 0 2em rgba(255, 255, 255, 1);
+        color: brown;
+        font-weight: 300;
+        cursor: pointer;
+    }
+
+    #to-top {
+        display: none;
+        position: fixed;
+        bottom: 60px;
+        right: 100px;
+        z-index: 99;
+        padding: 8px 8px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 5px;
+        text-transform: lowercase;
+        text-decoration: none;
+        line-height: 12px;
+        cursor: pointer;
+    }
+    #to-bottom {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 100px;
+        z-index: 99;
+        padding: 8px 8px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 5px;
+        text-transform: lowercase;
+        text-decoration: none;
+        line-height: 12px;
+        cursor: pointer;
+    }
+</style>
+<script>
+    function topFunction() {
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+    function bottomFunction() {
+        window.scrollTo(0,document.body.scrollHeight);
+    }
+</script>
+
+<body>
+    <div class="w3-container" style="text-align: center;">
+        <h3>Discover: {{result}}</h3>
+        <a onclick="bottomFunction()" id="to-bottom" title="Go to bottom" style="display: block;" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-chevron-down"></span> 
+        </a>
+        <div style="width: 40%; margin: auto;">
+            {{your_list}}
+        </div>
+        <a onclick="topFunction()" id="to-top" title="Go to top" style="display: block;" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-chevron-up"></span> 
+        </a>
+        <form action="http://localhost:3000/similar">
+            <input type="submit" value="Back to main page" />
+        </form>
+    </div>
+
+</body>
+
+</html>

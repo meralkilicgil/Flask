@@ -128,7 +128,7 @@ class Discovery extends React.Component {
                     <div className="selection">
                       <h4>Get info about tag</h4>
                       <form action={`http://localhost:5000/discover${this.state.parentValue}`} method="post">
-                        <FormLabel>Tag <FormControl autoFocus type="text" name="tag"></FormControl> </FormLabel>
+                        <FormLabel> <FormControl autoFocus type="text" name="tag"></FormControl> </FormLabel>
                         <Button block type="submit" className="submitDiscovery">Show </Button>
                       </form>
                     </div>
