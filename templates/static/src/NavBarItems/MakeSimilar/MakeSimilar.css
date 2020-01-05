@@ -1,32 +1,43 @@
 @media all and (min-width: 480px) {
   .MakeSimilar {
-    padding: 60px 0;
-    padding-left: 24%;
     text-align: center;
+    position: fixed !important;
+    z-index: 1070 !important;
+    top: 80px;
+    margin: 0 0 5% 20%;
+    height: 100%;
+    width: 90%;
+    will-change: transform;
+    transition: transform .2s ease-in-out;
+    box-shadow: 0 0.125rem 0.375rem rgba(90,97,105,.1), 
+                0 0.25rem 0.05rem rgba(90,97,105,.12), 
+                0 0.9375rem 0.375rem rgba(90,97,105,.1), 
+                0 0.4375rem 1.1875rem rgba(165,182,201,.1);
   }
 
-  .column{
+  .columnsimilar{
     float: left;
   }
 
-  .column.side{
-    padding-left: 8%;
-    padding-right: 10%;
-    width: 40%;
+  .columnsimilar.sidesimilar{
+    width: 45%;
     position: relative;
     flex-direction: column!important;
-    
+    display: inline-block;
+    margin-top: 7%;
   }
 
-  .column.middle{
-    width: 25%;
+  .columnsimilar.middlesimilar{
+    width: 50% !important;
     position: relative;
+    display: inline-block;
+    margin-top: 7%;
   }
 
-  .credential{
-    text-align-last:center;
+  .form-label{
+    color: #f9f1e9 !important;
+    padding: 0 !important;
   }
-
   .MakeSimilar form {
     margin: 0 auto;
     max-width: 350px;
@@ -38,26 +49,34 @@
     width: 80px;
   }
 
-  .MakeSimilar .label{
-    width: 250px;
-    margin: 10px 10%;
+  .input-similar{
+    width: 70% !important;
+    margin: 5% 5% 0 18% !important;
   }
 
-  .MakeSimilar .selection{
-    display: inline-block;
-    float: left;
-    margin-top: 50px;
+  .input-labek{
+    width: 80% !lmportant;
+    margin: 5% 5% 0 8% !important;
   }
 
-  .MakeSimilar .tabs{
-    display: inline-block;
-    float: left;
-    margin-right: 15%;
-    margin-top: 50px;
-
+  .mainsimilar-title {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    color: #f9f1e9;
+    text-align: center;
+    top: 8%;
+    left: 40%;
+    bottom: 80%;
+    -webkit-transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-50%,0);
   }
-  .HeaderMain{
-    width: 70%;
-  }
 
+  .subsimilar-title{
+    position: relative;
+    margin: 0 0 5% 0;
+    padding: 0;
+    color: #f9f1e9;
+    text-align: center;;
+  }
 }

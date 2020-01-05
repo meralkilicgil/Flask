@@ -49,7 +49,7 @@ def data():
 @app.route('/success')
 def goSuccess(playlistName):
     created= "Your playlist '" + playlistName +"' has been created successfully!"
-    return render_template('static/Success.html', created=created)
+    return render_template('static/info.html', result=created)
 
 @app.route('/toptracks_country', methods=['POST', 'GET'])
 def getTopTracksofCountry():
@@ -91,7 +91,7 @@ def showTopAlbumsOfTag():
         tag = request.form['tag']
         count = request.form['count']
         your_list= showTopAlbumsByTag(tag, count)
-        result = "Top " + count + " albums of '" + tag + "' genre"
+        result = "Discover: Top " + count + " albums of '" + tag + "' genre"
         return render_template('static/TracksAlbums.html', your_list=your_list, result= result, header1= "Artist", header2= "Album")
         #return redirect('http://localhost:3000/discovery', code=301)
 
@@ -102,7 +102,7 @@ def showTopTracksOfTag():
         tag = request.form['tag']
         count = request.form['count']
         your_list= showTopTracksByTag(tag, count)
-        result = "Top " + count + " tracks of '" + tag + "' genre"
+        result = "Discover: Top " + count + " tracks of '" + tag + "' genre"
         return render_template('static/TracksAlbums.html', your_list=your_list, result= result, header1= "Artist", header2= "Song")
         #return redirect('http://localhost:3000/discovery', code=301)
 
@@ -113,7 +113,7 @@ def showTopArtistsOfTag():
         tag = request.form['tag']
         count = request.form['count']
         your_list= showTopArtistsByTag(tag, count)
-        result = "Top " + count + " artists of tag '" + tag + "'"
+        result = "Discover: Top " + count + " artists of tag '" + tag + "'"
         return render_template('static/Success.html', your_list=your_list, result= result)
 
 @app.route('/discoverShowRandomTag', methods=['POST', 'GET'])
@@ -130,7 +130,7 @@ def showTopTagsOfArtist():
     if request.method == 'POST':
         artist = request.form['artist']
         your_list= showTopTagsForArtist(artist)
-        result = "Top tags of artist '" + artist + "'"
+        result = "Discover: Top tags of artist '" + artist + "'"
         return render_template('static/Success.html', your_list=your_list, result= result)
 
 @app.route('/discoverTrackByArtist', methods=['POST', 'GET'])
@@ -140,7 +140,7 @@ def showTopTracksOfArtist():
         artist = request.form['artist']
         count = request.form['count']
         your_list= showTopTracksByArtist(artist, count)
-        result = "Top " + count + " tracks of artist '" + artist +"'"
+        result = "Discover: Top " + count + " tracks of artist '" + artist +"'"
         return render_template('static/Success.html', your_list=your_list, result= result)
 
 @app.route('/discoverTopArtists', methods=['POST', 'GET'])
@@ -148,7 +148,7 @@ def showTopArtistList():
     global token2
     if request.method == 'POST':
         your_list= showTopArtistsChart()
-        result = "Top artists chart "
+        result = "Discover: Top artists chart "
         return render_template('static/Success.html', your_list=your_list, result= result)
 
 @app.route('/discoverTracksByCountry', methods=['POST', 'GET'])
@@ -157,7 +157,7 @@ def showTopTracksOfCountry():
     if request.method == 'POST':
         country = request.form['country']
         your_list= showTopTracksByCountry(country)
-        result = "Top tracks of country '" + country + "'"
+        result = "Discover: Top tracks of country '" + country + "'"
         return render_template('static/TracksAlbums.html', your_list=your_list, result= result, header1= "Artist", header2= "Song")   
 
 @app.route('/discoverArtistByCountry', methods=['POST', 'GET'])
@@ -166,7 +166,7 @@ def showTopArtistsOfCountry():
     if request.method == 'POST':
         country = request.form['country']
         your_list= showTopArtistsByCountry(country)
-        result = "Top artists of country '" + country + "'"
+        result = "Discover: Top artists of country '" + country + "'"
         return render_template('static/Success.html', your_list=your_list, result= result)   
 
 @app.route('/discoverTagInfo', methods=['POST', 'GET'])
@@ -178,7 +178,7 @@ def printTagInfo():
         x = info.find('<')
         if(x > 0):
             info = info[:x]
-        result = "Information about '" + tag + "' music"
+        result = "Discover: Information about '" + tag + "' music"
         return render_template('static/info.html', your_list=info, result= result)  
 
 @app.route('/feellucky_tag', methods=['POST', 'GET'])

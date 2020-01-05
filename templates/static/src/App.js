@@ -15,6 +15,7 @@ import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 import UserActions from './NavBarItems/UserActions/UserActions';
 import { Nav } from "shards-react";
 import { Container, Navbar } from "shards-react";
+
 class App extends React.Component {
 
   constructor(props) {
@@ -28,10 +29,10 @@ class App extends React.Component {
             <aside className="mainsidebar">
               <div className="navbar-side">
                 <ul className="nav-side">
-                  <Link to="/" className="navlink"><li className="navitem-side">Login</li></Link>
-                  <Link to="/similar" className="navlink"><li className="navitem">Create Playlists</li></Link>
-                  <Link to="/discovery" className="navlink"><li className="navitem">Discovery</li></Link>
-                  <Link to="/feellucky" className="navlink"><li className="navitem">Feel Lucky</li></Link>
+                  <Link to="/" className="navlink"><li className="navitem-side"><h4 className="side-title">Login</h4></li></Link>
+                  <Link to="/similar" className="navlink"><li className="navitem-side"><h4 className="side-title">Create Playlists</h4></li></Link>
+                  <Link to="/discovery" className="navlink"><li className="navitem-side"><h4 className="side-title">Discovery</h4></li></Link>
+                  <Link to="/feellucky" className="navlink"><li className="navitem-side"><h4 className="side-title">Feel Lucky</h4></li></Link>
                 </ul>
               </div>
             </aside>

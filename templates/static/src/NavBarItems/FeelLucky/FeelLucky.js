@@ -62,7 +62,7 @@ const FeelLucky = ({ smallStats }) => {
             return initial;
         }, {});
 
-    const getData = (token) => {
+    /* const getData = (token) => {
         console.log(token);
         axios.interceptors.request.use(function (config) {
             // Do something before request is sent
@@ -89,60 +89,53 @@ const FeelLucky = ({ smallStats }) => {
                 console.log(error);
             });
         console.log(successData);
-    }
+    } */
 
     componentDidMount();
     window.location.hash = "";
-    console.log(`Token before ${token}`)
-    useEffect(() => {
-        getData(token);
-    })
+ 
 
     console.log(2)
-    let urlkey = `http://localhost:5000/feellucky?${usernameToken}?${token}`
+    let urlkey = `http://localhost:5000/feellucky`;
     return (
         <div className="FeelLucky">
-            <div className="selection column side">
-            <h3>Create Random playlist</h3>
-            <InputGroup className="mb-3">
+            <div className="column side">
+            <h1 className="mainlucky-title">Create Random <span className="thin"> playlist</span></h1>
+            <InputGroup className="mb-3 lucky-input">
             <FormSelect onChange={handleChange}>
               <option value='0' className="credential">Choose Random Type</option>
               <option value='1' className="credential">Tag</option>
               <option value='2' className="credential">Artist</option>
               <option value='3' className="credential">Country</option>
             </FormSelect>
-          </InputGroup></div>
-          <div className="tabs column middle">
+          </InputGroup>
           {(() => {
             switch (tab.value) {
               case '0':
               case '1':
-                urlkey = `http://localhost:5000/feellucky_tag?${usernameToken}?${token}`
+                urlkey = `http://localhost:5000/feellucky_tag`
                 return (
                   <form action={urlkey} method="post">
-                    <h4>Create Random Tag Playlist </h4>
-                    <Button block type="submit">Create </Button>
+                    <Button block type="submit" className="submitLucky">Create </Button>
                   </form>
                 );
                 break;
               case '2':
-                urlkey = `http://localhost:5000/feellucky_artist?${usernameToken}?${token}`
+                urlkey = `http://localhost:5000/feellucky_artist`
                 return (
                   <div className="artist">
                     <form action={urlkey} method="post">
-                      <h4>Create Random Artist Playlist</h4>
-                      <Button block type="submit">Create </Button>
+                      <Button block type="submit" className="submitLucky">Create </Button>
                     </form>
                   </div>
                 );
                 break;
               case '3':
-                urlkey = `http://localhost:5000/feellucky_country?${usernameToken}?${token}`
+                urlkey = `http://localhost:5000/feellucky_country`
                 return (
                   <div className="country">
                     <form action={urlkey} method="post">
-                      <h4>Create Random Country Playlist </h4>
-                      <Button block type="submit">Create </Button>
+                      <Button block type="submit" className="submitLucky">Create </Button>
                     </form>
                   </div>
                 );

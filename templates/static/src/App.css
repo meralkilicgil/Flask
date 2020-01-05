@@ -1,10 +1,12 @@
 .App {
   text-align: center;
+  text-decoration: none;
+  position: fixed;
 }
 
 ul{
 	display: flex;
-  width: 100%;
+  width: 80%;
   margin: auto;
   display: block;
 	justify-content: space-between;
@@ -19,8 +21,8 @@ li {
 }
 
 li:hover {
-  background-size: 100% 100%;
-  color: #27262c;
+  background-size: 80% 80%;
+  color: #c6c0e4;
   animation: spring 300ms ease-out;
 	font-weight: bold;
 }
@@ -62,12 +64,15 @@ li:active {
   height: auto;
   width: 100%;
 }
-
+a{
+  text-decoration: none !important;
+}
 .nav-side{
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
   padding-top:55%;
+  line-height: 40px;
   margin-bottom: 0;
   list-style: none;
   position: relative;
@@ -75,8 +80,7 @@ li:active {
 }
 .navitem-side{
   white-space: nowrap;
-  min-width: 100%;
-  max-width: 100%;
+  max-width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
@@ -85,16 +89,16 @@ li:active {
   transition: box-shadow .2s ease,color .2s ease,background-color .2s ease;
   font-size: .85rem;
   border-bottom: 1px solid #e1e5eb;
-  font-weight: 400;
-  color: #3d5170;
+  font-weight: bold;
+  color: #f9f1e9;
   padding: .9375rem 1.5625rem;
+  text-decoration: none !important;
 }
 .mainsidebar{
-  top: 0;
+  top: 40px;
   position: fixed;
   height: 100vh;
   width: 20%;
-  background: #fff;
   z-index: 1070;
   will-change: transform;
   transition: -webkit-transform .2s ease-in-out;
@@ -104,11 +108,37 @@ li:active {
   box-shadow: 0 0.125rem 9.375rem rgba(90,97,105,.1), 0 0.25rem 0.5rem rgba(90,97,105,.12), 0 0.9375rem 1.375rem rgba(90,97,105,.1), 0 0.4375rem 2.1875rem rgba(165,182,201,.1);
 }
 .header{
-  padding-left: 84%;
-  height: 30px;
-  width: 65px !important;
-  padding-top: 10px !important;
-}
+  margin-left: 80%;
+  text-align: center;
+  position: fixed !important;
+  z-index: 1070 !important;
+  top: 30px;;
+  will-change: transform;
+  transition: transform .2s ease-in-out;
+  background-color: #fff;
+  border: none;
+  border-radius: .625rem
+ }
 img{
   width: 30px !important;
+}
+
+.text-danger{
+  border-color: white !important;
+  background-color: white !important;
+}
+.side-title {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  color: #f9f1e9;
+  text-align: center;
+  top: 8%;
+  left: 40%;
+  bottom: 80%;
+  line-height: 1.5;
+  font-weight: 500;
+  -webkit-transform: translate3d(-50%,-50%,0);
+  transform: translate3d(-50%,-50%,0);
+  font-size: 1.4em !important;
 }

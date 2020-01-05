@@ -74,7 +74,7 @@ const FormValidation = ( props ) => {
     <Form>
       
       { !token &&
-      <Button block bsSize="large" disabled={ validateForm() } type="submit"  href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}  >
+      <Button block bssize="large" disabled={ validateForm() } type="submit"  href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}  >
           Login
       </Button>
       }

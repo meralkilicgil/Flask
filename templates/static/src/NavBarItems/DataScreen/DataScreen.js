@@ -22,7 +22,7 @@ import {
   InputGroupText,
   FormSelect
 } from "shards-react";
-
+import "./../MakeSimilar/MakeSimilar.css";
 const fs = require('fs')
 
 
@@ -133,10 +133,9 @@ const DataInfo = ({ smallStats }) => {
 
 
   return (
-    <div>
+    <div className="MakeSimilar">
       <form action={urlkey} method="POST">
-        <h3>Redirecting...</h3>
-
+        <h3 className="main-title">Redirecting...</h3>
       </form>
     </div>
   );

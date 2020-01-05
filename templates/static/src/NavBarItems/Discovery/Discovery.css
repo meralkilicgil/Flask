@@ -1,16 +1,25 @@
 @media all and (min-width: 480px) {
     .Discovery {
-      padding: 60px 0;
       text-align: center;
+      position: fixed !important;
+      z-index: 1070 !important;
+      top: 80px;
+      margin: 0 0 5% 20%;
+      height: 100%;
+      width: 90%;
+      will-change: transform;
+      transition: transform .2s ease-in-out;
+      box-shadow: 0 0.125rem 0.375rem rgba(90,97,105,.1), 
+                0 0.25rem 0.05rem rgba(90,97,105,.12), 
+                0 0.9375rem 0.375rem rgba(90,97,105,.1), 
+                0 0.4375rem 1.1875rem rgba(165,182,201,.1);
     }
     
     .Discovery .tabs{
       display: inline-block;
-      float: right;
       margin-right: 280px;
       margin-top: 80px;
     }
-
     .tabsSelection{
       display: inline-block;
     }
@@ -21,19 +30,14 @@
 
     .Discovery .selection{
       display: inline-block;
-      margin-left: 80px;
-      margin-top: 50px;
-      width: 300px;
+      margin: 3% 30% 10% 10%;
+      width: 35% !important;
     }
 
     .Discovery form {
       margin: 0 auto;
       max-width: 320px;
-    }
-
-    .byValueSelection{
-      margin: auto;
-      padding-left: 5%;
+      display: inline-grid;
     }
 
     .Discovery Button{
@@ -42,11 +46,11 @@
       width: 80px;
     }
 
+    
     .Discovery .submitDiscovery{
-      margin: 10px;
       height: 40px;
-      margin-left: 35%;
-      width: 80px;
+      margin-left: 25%;
+      width: 90px;
       will-change: background-color,box-shadow,color;
       -webkit-transition: box-shadow .2s ease,color .2s ease,background-color .2s ease;
       transition: box-shadow .2s ease,color .2s ease,background-color .2s ease;
@@ -56,18 +60,14 @@
     .menubar{
       overflow-y: hidden;
       overflow-x: auto;
-      height: 80%;
-      width: 70%;
-    }
-
-    .Discovery h1{
-      padding-left: 10%;
+      height: 23%;
+      width: 90%;
+      padding: 4% 13% 0 0%;
     }
     
     .menu{
       display: flex;
       flex-wrap: wrap;
-      padding-left: 15%;
       margin-bottom: 0;
       list-style: none;
     }
@@ -86,5 +86,53 @@
       color: #3d5170;
       padding: .9375rem 1.5625rem;
     }
-    
+    ul{
+      width: 100%;
+      margin: auto;
+      display: block;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .form-label{
+      font-size: larger !important;
+      font-weight: 500 !important;
+      width: 85%;
+      margin: 2% 10% 2% 5%;
+    }
+
+    .form-control{
+      width: 95%;
+      margin: 5% 5% 0 5% !important;
+    }
+
+    .inputdiscover .input-group{
+      width: 70% !important;
+      margin: 0 5% 5% 15% !important;
+    }
+
+    .maindiscover-title {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      color: #f9f1e9;
+      text-align: center;
+      top: 8%;
+      left: 40%;
+      bottom: 80%;
+      -webkit-transform: translate3d(-50%,-50%,0);
+      transform: translate3d(-50%,-50%,0);
+    }
+  
+    .subdiscover-title{
+      position: relative;
+      margin: 0 0 5% 0;
+      padding: 0;
+      color: #f9f1e9;
+      text-align: center;;
+    }
+
+    .thin{
+      font-size: 0.5em !important;
+    }
   }
