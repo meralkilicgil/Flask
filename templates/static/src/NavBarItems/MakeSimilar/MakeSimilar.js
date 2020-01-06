@@ -67,35 +67,6 @@ const MakeSimilar = ({ smallStats }) => {
       return initial;
     }, {});
 
-  /* const getData = (token) => {
-    console.log(token);
-    axios.interceptors.request.use(function (config) {
-      // Do something before request is sent
-
-      config.headers["Authorization"] = `Bearer ${token}`;
-      console.log(config)
-      return config;
-    }, function (error) {
-      // Do something with request error
-      return Promise.reject(error);
-    });
-    axios.get("https://api.spotify.com/v1/me/")
-      .then((data) => {
-        first = data.data.display_name;
-        //window.location.href = `http://localhost:3000/callback?${data.data.display_name}?${token}`;
-
-        setUserNameToken(data.data.display_name)
-        //setState({
-        //...successData,
-        //[data.data.items.name ] : data.data.items.popularity
-        //});
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    console.log(successData);
-  } */
-  
   componentDidMount();
   window.location.hash = "";
  
@@ -110,14 +81,14 @@ const MakeSimilar = ({ smallStats }) => {
      {/*  <img class="user-avatar rounded-circle mr-2" src={profilePic} alt="User Avatar" /> */}
      <h2 className="mainsimilar-title">Create <span className="thin">Playlist</span></h2>
       <div className="columnsimilar sidesimilar">
-        <h4 className="subsimilar-title">Create your playlist based on: </h4>
+        <h4 className="subsimilar-title">Create your playlist with: </h4>
         <InputGroup className="mb-3 input-similar">
           <FormSelect onChange={handleChange}>
             <option value='0'>Choose Playlist Credentials</option>
-            <option value='1'>Songs of artists</option>
-            <option value='2'>Artist</option>
-            <option value='3'>Country</option>
-            <option value='4'>Tag</option>
+            <option value='1'>Similar to a song</option>
+            <option value='2'>Based on an artist</option>
+            <option value='3'>Based on a country</option>
+            <option value='4'>Based on a music genre</option>
           </FormSelect>
         </InputGroup>
       </div>
@@ -129,7 +100,7 @@ const MakeSimilar = ({ smallStats }) => {
               urlkey = `http://localhost:5000/create`
               return (
                 <form action={urlkey} method="post">
-                  <h4 className="subsimilar-title">Create Similar Playlist </h4>
+                  <h4 className="subsimilar-title">Create with similar to a song of an artist </h4>
                   <FormLabel>Artist  </FormLabel><FormControl autoFocus type="text" name="artist" className="input-label"></FormControl>
                   <FormLabel>Song </FormLabel><FormControl autoFocus type="text" name="track" className="input-label"></FormControl>
                   <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="input-label"></FormControl>
@@ -143,7 +114,7 @@ const MakeSimilar = ({ smallStats }) => {
               return (
                 <div className="artist">
                   <form action={urlkey} method="post">
-                    <h4 className="subsimilar-title">Top Tracks of Artist</h4>
+                    <h4 className="subsimilar-title">Create with top songs of an artist</h4>
                     <FormLabel>Artist </FormLabel><FormControl autoFocus type="text" name="artist" className="label"></FormControl>
                     <FormLabel>Count  </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
                     <FormLabel>Playlist Name  </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
@@ -157,7 +128,7 @@ const MakeSimilar = ({ smallStats }) => {
               return (
                 <div className="country">
                   <form action={urlkey} method="post">
-                    <h4 class="subsimilar-title">Country Top Tracks</h4>
+                    <h4 class="subsimilar-title">Create with top songs of a country</h4>
                     <FormLabel>Country</FormLabel><FormControl autoFocus type="text" name="country" className="label"></FormControl>
                     <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
                     <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>
@@ -171,7 +142,7 @@ const MakeSimilar = ({ smallStats }) => {
               return (
                 <div className="tag">
                   <form action={urlkey} method="post">
-                    <h4 class="subsimilar-title">Top Tracks of Tag</h4>
+                    <h4 class="subsimilar-title">Create with top songs of a music genre</h4>
                     <FormLabel>Tag</FormLabel><FormControl autoFocus type="text" name="tag" className="label"></FormControl>
                     <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="label"></FormControl>
                     <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="label"></FormControl>

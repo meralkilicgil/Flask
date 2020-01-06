@@ -104,9 +104,9 @@ const FeelLucky = ({ smallStats }) => {
             <InputGroup className="mb-3 lucky-input">
             <FormSelect onChange={handleChange}>
               <option value='0' className="credential">Choose Random Type</option>
-              <option value='1' className="credential">Tag</option>
-              <option value='2' className="credential">Artist</option>
-              <option value='3' className="credential">Country</option>
+              <option value='1' className="credential">Lucky Genre</option>
+              <option value='2' className="credential">Lucky Artist</option>
+              <option value='3' className="credential">Lucky Country</option>
             </FormSelect>
           </InputGroup>
           {(() => {

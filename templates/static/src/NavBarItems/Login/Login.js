@@ -6,6 +6,7 @@ import {
   Card,
   CardHeader,
   ListGroup,
+  CardImg,
   ListGroupItem,
   Form,
   Alert
@@ -14,7 +15,6 @@ import {
 import Forms from "../../components/components-overview/Forms";
 import PageTitle from "../../components/common/PageTitle";
 import FormValidation from "../../components/components-overview/FormValidation";
-
 
 import "./Login.css";
 
@@ -35,6 +35,7 @@ export default function Login(props) {
             className="text-center"
             md={{ span: 4, offset: 4 }}
           />
+          <CardImg bottom src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-download-logo-30.png"></CardImg>
         </Row>
 
         <Row>
