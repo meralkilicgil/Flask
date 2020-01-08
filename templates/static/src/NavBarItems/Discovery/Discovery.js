@@ -61,9 +61,9 @@ class Discovery extends React.Component {
                           <InputGroup className="mb-3">
                             <FormSelect onChange={this.handleChange}>
                               <option value='0' className="type">Choose Discover Type</option>
-                              <option value='AlbumByTag' className="type">Show top albums by tag</option>
-                              <option value='TrackByTag' className="type">Show top tracks by tag</option>
-                              <option value='ArtistByTag' className="type">Show Top Artists By Tag</option>
+                              <option value='AlbumByTag' className="type">Show top albums</option>
+                              <option value='TrackByTag' className="type">Show top songs </option>
+                              <option value='ArtistByTag' className="type">Show top artists </option>
                               <option value='ShowRandomTag' className="type">Show Random Tag</option>
                             </FormSelect>
                           </InputGroup>
@@ -82,9 +82,9 @@ class Discovery extends React.Component {
                           <InputGroup className="mb-3">
                             <FormSelect onChange={this.handleChange}>
                               <option value='0'>Choose Discover Type</option>
-                              <option value="TopArtists">Show Top Artists</option>
-                              <option value='TagByArtist'>Show Top Tags By Artist</option>
-                              <option value='TrackByArtist'>Show Top Tracks By Artist</option>
+                              <option value="TopArtists">Show top artists chart</option>
+                              <option value='TagByArtist'>Show top tags</option>
+                              <option value='TrackByArtist'>Show top songs</option>
                             </FormSelect>
                           </InputGroup>
                           <form action={`http://localhost:5000/discover${this.state.value}`} method="post">
@@ -102,8 +102,8 @@ class Discovery extends React.Component {
                           <InputGroup className="mb-3">
                             <FormSelect onChange={this.handleChange}>
                               <option value='0'>Choose Discover Type</option>
-                              <option value="TracksByCountry">Show Top Tracks By Country</option>
-                              <option value='ArtistByCountry'>Show Top Artists By Country</option>
+                              <option value="TracksByCountry">Show top songs</option>
+                              <option value='ArtistByCountry'>Show top artists</option>
                             </FormSelect>
                           </InputGroup>
                           <form action={`http://localhost:5000/discover${this.state.value}`} method="post">
