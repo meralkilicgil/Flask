@@ -505,3 +505,63 @@ def getTagInfo (tag):
             return None
         else: 
             return response['tag']['wiki']['content']
+
+
+def getAlbumInfo (album):
+    params = {'method' : 'album.getinfo', 'album' : album, 'api_key': API_KEY, 'format' : 'json'} 
+    result = []
+    
+    try:
+        response = requests.post(URL, data=params, timeout=5).json()
+    except requests.exceptions.RequestException as e:
+        print(e)
+        return None
+
+    if 'error' in response:
+        print(response['message'])
+        return None
+    else:
+        if response['album']['wiki']['content'] == "":
+            return None
+        else: 
+            return response['album']['wiki']['content']
+
+
+def getTrackInfo (track):
+    params = {'method' : 'track.getInfo', 'track' : track, 'api_key': API_KEY, 'format' : 'json'} 
+    result = []
+    
+    try:
+        response = requests.post(URL, data=params, timeout=5).json()
+    except requests.exceptions.RequestException as e:
+        print(e)
+        return None
+
+    if 'error' in response:
+        print(response['message'])
+        return None
+    else:
+        if response['track']['wiki']['content'] == "":
+            return None
+        else: 
+            return response['track']['wiki']['content']
+            
+
+def getArtistInfo (artist):
+    params = {'method' : 'artist.getinfo', 'artist' : artist, 'api_key': API_KEY, 'format' : 'json'} 
+    result = []
+    
+    try:
+        response = requests.post(URL, data=params, timeout=5).json()
+    except requests.exceptions.RequestException as e:
+        print(e)
+        return None
+
+    if 'error' in response:
+        print(response['message'])
+        return None
+    else:
+        if response['artist']['wiki']['content'] == "":
+            return None
+        else: 
+            return response['artist']['wiki']['content']

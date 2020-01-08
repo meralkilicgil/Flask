@@ -14,14 +14,12 @@ from importlib import reload
 import os
 from urllib.parse import urlsplit, urlunsplit
 from random import randrange
+import json
 
 from flask import Flask, redirect, url_for, request, render_template
 app = Flask(__name__)
 global token2
 
-artistsList = ["Ed Sheeran","Post Malone","Camila Cabello","J Balvin","Ariana Grande","Khalid","Justin Bieber","Billie Eilish","Maroon 5","Shawn Mendes","Drake","Sam Smith","Selena Gomez","Daddy Yankee","Dua Lipa","Coldplay","Marshmello","Taylor Swift","Diplo","Nicki Minaj","The Weeknd","The Chainsmokers","Tones and I","Halsey","Travis Scott","Bad Bunny","Mariah Carey","David Guetta","Cardi B","Kanye West","Lewis Capaldi","Ozuna","Imagine Dragons","Swae Lee","Juice WRLD","Rihanna","Calvin Harris","Sia","Tyga","Bruno Mars","Black Eyed Peas","Eminem","DJ Snake","Lauv","Katy Perry","Zayn","Farruko","Lady Gaga","Chris Brown"]
-genresList = ["rock","alternative","classic rock","classical","jazz","blues","classical rock","oldies","progressive rock","hard rock","rap","hip-hop","dance","electronica","indie rock","folk","soul","funk","soundtracks","thrash metal","punk rock","grunge","country","reggae","power metal","blues rock","post punk","r&b","new wawe","classical crossover","psychedelic rock","symphonic metal","glam rock","big band","black metal","pop","disco","opera","techno","hardcore","death metal","acoustic rock","folk metal","bluegrass","drum and bass","house","garage rock","britpop","soul","melodic death metal","religious","art rock","celtic","swing","synth pop","post-rock","latin","soft rock","symphonic rock","tango"]
-countryList =["Armenia","Australia","Austria","Belgium","Brazil","Canada","China","Denmark","France","Germany","Greece","Iceland","Italy","Japan","Korea South","Luxembourg","Mexico","Netherlands","Norway","Poland","Portugal","Romania","Russia","Serbia","Slovakia","Slovenia","Spain","Sweden","Switzerland","Turkey","Ukraine","United Arab Emirates","United Kingdom","United States"]
 @app.route('/')
 def index():
     return render_template('static/src/App.js')
@@ -184,8 +182,11 @@ def printTagInfo():
 @app.route('/feellucky_tag', methods=['POST', 'GET'])
 def feelLucky():
     global token2
-    if request.method == 'POST':       
-        tag = genresList[randrange(len(genresList))]
+    if request.method == 'POST':    
+        f = open('genres.json','r')
+        genres = json.load(f)
+        f.close()   
+        tag = genres[randrange(len(genres))]
         count = 20
         name = "Feel lucky: " + tag
         return getTopTracksByTag(tag, count, name) 
@@ -193,8 +194,11 @@ def feelLucky():
 @app.route('/feellucky_artist', methods=['POST', 'GET'])
 def feelLuckyArtist():
     global token2
-    if request.method == 'POST':       
-        artist = artistsList[randrange(len(artistsList))]
+    if request.method == 'POST':  
+        j = open('artists.json','r')
+        artists = json.load(j)
+        j.close()      
+        artist = artists[randrange(len(artists))]
         count = 20
         name = "Feel lucky: " + artist
         return getTopTracksByArtist(artist, count, name)
@@ -203,7 +207,10 @@ def feelLuckyArtist():
 def feelLuckyCountry():
     global token2
     if request.method == 'POST':       
-        country = countryList[randrange(len(countryList))]
+        k = open('countries.json','r')
+        countries = json.load(k)
+        k.close()  
+        country = countries[randrange(len(countries))]
         count = 20
         name = "Feel lucky: " + country
         return getTopTracksByCountry(country, count, name)
@@ -665,6 +672,50 @@ def showTagInfo (tag):
     print ("{0:20s}".format("-------------------------------------------------------------"))
     return result
 
+def showAlbumInfo (album):
+    print ("{0:20s}".format("-------------------------------------------------------------"))
+    print ("{0}".format(album))
+    print ("{0:20s}".format("-------------------------------------------------------------"))
+
+    result  = lastFM.getAlbumInfo(album)
+    
+    if result is not None:
+        print ("{0}".format(result))
+    else: 
+        print ("no info....")
+    
+    print ("{0:20s}".format("-------------------------------------------------------------"))
+    return result
+
+def showTrackInfo (track):
+    print ("{0:20s}".format("-------------------------------------------------------------"))
+    print ("{0}".format(track))
+    print ("{0:20s}".format("-------------------------------------------------------------"))
+
+    result  = lastFM.getTrackInfo(track)
+    
+    if result is not None:
+        print ("{0}".format(result))
+    else: 
+        print ("no info....")
+    
+    print ("{0:20s}".format("-------------------------------------------------------------"))
+    return result
+
+def showArtistInfo (artist):
+    print ("{0:20s}".format("-------------------------------------------------------------"))
+    print ("{0}".format(artist))
+    print ("{0:20s}".format("-------------------------------------------------------------"))
+
+    result  = lastFM.getArtistInfo(artist)
+    
+    if result is not None:
+        print ("{0}".format(result))
+    else: 
+        print ("no info....")
+    
+    print ("{0:20s}".format("-------------------------------------------------------------"))
+    return result
 
 def generatePlaylist(track_IDs, playlistName):
     """."""
@@ -815,7 +866,7 @@ def showRandomTag (count = 20):
                 t.append(x)
                 break
         #print x
-        genres.append(json_file[x]['name'])  
+        genres.append(json_file[x])  
     
     for genre in genres:
         print ("{0}".format(genre))
@@ -901,6 +952,9 @@ if __name__ == '__main__':
       'showrandomtag' : showRandomTag,
       'showsimilartags' : showSimilarTags,
       'showtaginfo' : showTagInfo,
+      'showtrackinfo' : showTrackInfo,
+      'showalbuminfo' : showAlbumInfo,
+      'showartistinfo' : showArtistInfo,
       'showtoptagschart' : showTopTagsChart,     
       'showtoptagsforartist' : showTopTagsForArtist,
       'showtoptagsfortrack': showTopTagsForTrack,

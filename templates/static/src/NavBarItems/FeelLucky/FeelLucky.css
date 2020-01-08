@@ -5,7 +5,9 @@
       z-index: 1070 !important;
       top: 190px;
       margin: 0 0 5% 20%;
-      height: 100%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      height: 85%;
       width: 90%;
       will-change: transform;
       transition: transform .2s ease-in-out;

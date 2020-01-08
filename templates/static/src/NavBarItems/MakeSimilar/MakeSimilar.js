@@ -66,35 +66,6 @@ const MakeSimilar = ({ smallStats }) => {
       }
       return initial;
     }, {});
-
-  /* const getData = (token) => {
-    console.log(token);
-    axios.interceptors.request.use(function (config) {
-      // Do something before request is sent
-
-      config.headers["Authorization"] = `Bearer ${token}`;
-      console.log(config)
-      return config;
-    }, function (error) {
-      // Do something with request error
-      return Promise.reject(error);
-    });
-    axios.get("https://api.spotify.com/v1/me/")
-      .then((data) => {
-        first = data.data.display_name;
-        //window.location.href = `http://localhost:3000/callback?${data.data.display_name}?${token}`;
-
-        setUserNameToken(data.data.display_name)
-        //setState({
-        //...successData,
-        //[data.data.items.name ] : data.data.items.popularity
-        //});
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    console.log(successData);
-  } */
   
   componentDidMount();
   window.location.hash = "";
@@ -109,6 +80,7 @@ const MakeSimilar = ({ smallStats }) => {
     <div className="MakeSimilar">
      {/*  <img class="user-avatar rounded-circle mr-2" src={profilePic} alt="User Avatar" /> */}
      <h2 className="mainsimilar-title">Create <span className="thin">Playlist</span></h2>
+     
       <div className="columnsimilar sidesimilar">
         <h4 className="subsimilar-title">Create your playlist based on: </h4>
         <InputGroup className="mb-3 input-similar">
