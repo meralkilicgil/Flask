@@ -65,6 +65,28 @@
     line-height: 12px;
     cursor: pointer;
   }
+    .success {
+      background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg") no-repeat;
+      overflow: hidden;
+      background-size: cover;
+      width: 100%;
+      min-height: 100vh;
+      background-position: center top;
+      z-index: 1;
+    }
+
+    .content {
+      margin: 10% auto;
+      border-radius: 30px;
+      padding: 2%;
+      background-color: black;
+      opacity: 0.6;
+      color: white;
+      font-size: large;
+      width: 50%;
+      height: 80%;
+    }
+  
 </style>
 <script>
   function topFunction() {
@@ -76,27 +98,29 @@
 </script>
 
 <body>
-  <div class="w3-container" style="text-align: center; padding-top: 20px;">
-    <h3>{{result}}</h3>
-    <a onclick="bottomFunction()" id="to-bottom" title="Go to bottom" style="display: block;" class="btn btn-info btn-lg">
-      <span class="glyphicon glyphicon-chevron-down"></span> 
-    </a>
-    <table class="w3-table" style="width: 40%; margin: auto;">
+  <header class="success">
+    <div class="content" style="text-align: center; padding-top: 20px;">
+      <h3>{{result}}</h3>
+      <a onclick="bottomFunction()" id="to-bottom" title="Go to bottom" style="display: block;"
+        class="btn btn-info btn-lg">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </a>
+      <table class="w3-table">
 
-      {% for your_list_element in your_list %}
-      <tr class="w3-hover-text-blue">
-        <td style="text-align: center;">{{ your_list_element}} </td>
-      </tr>
-      {% endfor %}
-    </table>
-    <a onclick="topFunction()" id="to-top" title="Go to top" style="display: block;" class="btn btn-info btn-lg">
-      <span class="glyphicon glyphicon-chevron-up"></span> 
-    </a>
-    <form action="http://localhost:3000/similar">
-      <input type="submit" value="Back to main page" />
-    </form>
-  </div>
-
+        {% for your_list_element in your_list %}
+        <tr class="w3-hover-text-blue">
+          <td style="text-align: center;">{{ your_list_element}} </td>
+        </tr>
+        {% endfor %}
+      </table>
+      <a onclick="topFunction()" id="to-top" title="Go to top" style="display: block;" class="btn btn-info btn-lg">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>
+      <form action="http://localhost:3000/similar">
+        <input type="submit" value="Back to main page" />
+      </form>
+    </div>
+  </header>
 </body>
 
 </html>

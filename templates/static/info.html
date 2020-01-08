@@ -1,337 +1,125 @@
 <!DOCTYPE html>
 <html>
-<title>{{result}}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
-    input[type="submit"] {
-        display: inline-block;
-        padding: 0.46em 1.6em;
-        border: 0.1em #000000;
-        margin: 0.5em 0.2em 0.5em 0;
-        border-radius: 0.12em;
-        text-decoration: none;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 300;
-        color: black;
-        text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-        background-color: rgb(104, 171, 226);
-        text-align: center;
-        transition: background-color .3s,
-            opacity .5s, visibility .5s;
-        z-index: 1000;
-    }
 
-    input[type="submit"]:hover {
-        text-shadow: 0 0 2em rgba(255, 255, 255, 1);
-        color: brown;
-        font-weight: 300;
-        cursor: pointer;
-    }
-
-    #to-top {
-        display: none;
-        position: fixed;
-        bottom: 60px;
-        right: 100px;
-        z-index: 99;
-        padding: 8px 8px 10px;
-        font-size: 12px;
-        font-weight: 600;
-        border-radius: 5px;
-        text-transform: lowercase;
-        text-decoration: none;
-        line-height: 12px;
-        cursor: pointer;
-    }
-
-    #to-bottom {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 100px;
-        z-index: 99;
-        padding: 8px 8px 10px;
-        font-size: 12px;
-        font-weight: 600;
-        border-radius: 5px;
-        text-transform: lowercase;
-        text-decoration: none;
-        line-height: 12px;
-        cursor: pointer;
-    }
-
-    .large-header {
-        position: relative;
-        width: 100%;
-        background: #111;
-        overflow: hidden;
-        background-size: cover;
-        background-position: center center;
-        z-index: 1;
-    }
-
-    .demo .large-header {
-        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
-    }
-
-    .main-title {
-        position: absolute;
-        margin: 0;
-        padding: 0;
-        color: #F9F1E9;
-        text-align: center;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate3d(-50%, -50%, 0);
-        transform: translate3d(-50%, -50%, 0);
-    }
-
-    .demo .main-title {
-        text-transform: uppercase;
-        font-size: 4.2em;
-        letter-spacing: 0.1em;
-    }
-
-    .main-title .thin {
-        font-weight: 200;
-    }
-
-    @media only screen and (max-width: 768px) {
-        .demo .main-title {
-            font-size: 3em;
-        }
-    }
-</style>
-<script>
-
-    function loadHeader() {
-
-        var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
-
-        // Main
-        initHeader();
-        initAnimation();
-        addListeners();
-
-        function initHeader() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            target = { x: width / 2, y: height / 2 };
-
-            largeHeader = document.getElementById('large-header');
-            largeHeader.style.height = height + 'px';
-
-            canvas = document.getElementById('demo-canvas');
-            canvas.width = width;
-            canvas.height = height;
-            ctx = canvas.getContext('2d');
-
-            // create points
-            points = [];
-            for (var x = 0; x < width; x = x + width / 20) {
-                for (var y = 0; y < height; y = y + height / 20) {
-                    var px = x + Math.random() * width / 20;
-                    var py = y + Math.random() * height / 20;
-                    var p = { x: px, originX: px, y: py, originY: py };
-                    points.push(p);
-                }
-            }
-
-            // for each point find the 5 closest points
-            for (var i = 0; i < points.length; i++) {
-                var closest = [];
-                var p1 = points[i];
-                for (var j = 0; j < points.length; j++) {
-                    var p2 = points[j]
-                    if (!(p1 == p2)) {
-                        var placed = false;
-                        for (var k = 0; k < 5; k++) {
-                            if (!placed) {
-                                if (closest[k] == undefined) {
-                                    closest[k] = p2;
-                                    placed = true;
-                                }
-                            }
-                        }
-
-                        for (var k = 0; k < 5; k++) {
-                            if (!placed) {
-                                if (getDistance(p1, p2) < getDistance(p1, closest[k])) {
-                                    closest[k] = p2;
-                                    placed = true;
-                                }
-                            }
-                        }
-                    }
-                }
-                p1.closest = closest;
-            }
-
-            // assign a circle to each point
-            for (var i in points) {
-                var c = new Circle(points[i], 2 + Math.random() * 2, 'rgba(255,255,255,0.3)');
-                points[i].circle = c;
-            }
+<head>
+    <title>{{result}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        input[type="submit"] {
+            display: inline-block;
+            padding: 0.46em 1.6em;
+            border: 0.1em #000000;
+            margin: 0.5em 0.2em 0.5em 0;
+            border-radius: 0.12em;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            color: black;
+            text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+            background-color: rgb(104, 171, 226);
+            text-align: center;
+            transition: background-color .3s,
+                opacity .5s, visibility .5s;
+            z-index: 1000;
         }
 
-        // Event handling
-        function addListeners() {
-            if (!('ontouchstart' in window)) {
-                window.addEventListener('mousemove', mouseMove);
-            }
-            window.addEventListener('scroll', scrollCheck);
-            window.addEventListener('resize', resize);
+        input[type="submit"]:hover {
+            text-shadow: 0 0 2em rgba(255, 255, 255, 1);
+            color: brown;
+            font-weight: 300;
+            cursor: pointer;
         }
 
-        function mouseMove(e) {
-            var posx = posy = 0;
-            if (e.pageX || e.pageY) {
-                posx = e.pageX;
-                posy = e.pageY;
-            }
-            else if (e.clientX || e.clientY) {
-                posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-                posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-            }
-            target.x = posx;
-            target.y = posy;
+        #to-top {
+            display: none;
+            position: fixed;
+            bottom: 60px;
+            right: 100px;
+            z-index: 99;
+            padding: 8px 8px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 5px;
+            text-transform: lowercase;
+            text-decoration: none;
+            line-height: 12px;
+            cursor: pointer;
         }
 
-        function scrollCheck() {
-            if (document.body.scrollTop > height) animateHeader = false;
-            else animateHeader = true;
+        #to-bottom {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 100px;
+            z-index: 99;
+            padding: 8px 8px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 5px;
+            text-transform: lowercase;
+            text-decoration: none;
+            line-height: 12px;
+            cursor: pointer;
         }
 
-        function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            largeHeader.style.height = height + 'px';
-            canvas.width = width;
-            canvas.height = height;
+        .info {
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg") no-repeat;
+            overflow: hidden;
+            background-size: cover;
+            width: 100%;
+            min-height: 100vh;
+            background-position: center top;
+            z-index: 1;
         }
 
-        // animation
-        function initAnimation() {
-            animate();
-            for (var i in points) {
-                shiftPoint(points[i]);
-            }
+        .content {
+            margin: 10% auto;
+            border-radius: 30px;
+            padding: 2%;
+            background-color: black;
+            opacity: 0.6;
+            color: white;
+            font-size: large;
+            width: 50%;
+            height: 80%;
         }
-
-        function animate() {
-            if (animateHeader) {
-                ctx.clearRect(0, 0, width, height);
-                for (var i in points) {
-                    // detect points in range
-                    if (Math.abs(getDistance(target, points[i])) < 4000) {
-                        points[i].active = 0.3;
-                        points[i].circle.active = 0.6;
-                    } else if (Math.abs(getDistance(target, points[i])) < 20000) {
-                        points[i].active = 0.1;
-                        points[i].circle.active = 0.3;
-                    } else if (Math.abs(getDistance(target, points[i])) < 40000) {
-                        points[i].active = 0.02;
-                        points[i].circle.active = 0.1;
-                    } else {
-                        points[i].active = 0;
-                        points[i].circle.active = 0;
-                    }
-
-                    drawLines(points[i]);
-                    points[i].circle.draw();
-                }
-            }
-            requestAnimationFrame(animate);
+    </style>
+    <script>
+        function topFunction() {
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
-
-        function shiftPoint(p) {
-            TweenLite.to(p, 1 + 1 * Math.random(), {
-                x: p.originX - 50 + Math.random() * 100,
-                y: p.originY - 50 + Math.random() * 100, ease: Circ.easeInOut,
-                onComplete: function () {
-                    shiftPoint(p);
-                }
-            });
+        function bottomFunction() {
+            window.scrollTo(0, document.body.scrollHeight);
         }
+    </script>
+</head>
 
-        // Canvas manipulation
-        function drawLines(p) {
-            if (!p.active) return;
-            for (var i in p.closest) {
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(p.closest[i].x, p.closest[i].y);
-                ctx.strokeStyle = 'rgba(156,217,249,' + p.active + ')';
-                ctx.stroke();
-            }
-        }
-
-        function Circle(pos, rad, color) {
-            var _this = this;
-
-            // constructor
-            (function () {
-                _this.pos = pos || null;
-                _this.radius = rad || null;
-                _this.color = color || null;
-            })();
-
-            this.draw = function () {
-                if (!_this.active) return;
-                ctx.beginPath();
-                ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
-                ctx.fillStyle = 'rgba(0, 153, 0,' + _this.active + ')';
-                ctx.fill();
-            };
-        }
-
-        // Util
-        function getDistance(p1, p2) {
-            return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
-        }
-
-    }
-    function topFunction() {
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    }
-    function bottomFunction() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-</script>
-
-<body onload="loadHeader()">
-    <div class="container demo">
-        <div class="content">
-            <div id="large-header" class="large-header">
-                <canvas id="demo-canvas"></canvas>
-                <div class="w3-container" style="text-align: center;">
-                    <h3>{{result}}</h3>
-                    <a onclick="bottomFunction()" id="to-bottom" title="Go to bottom" style="display: block;"
-                        class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-chevron-down"></span>
-                    </a>
-                    <div style="width: 40%; margin: auto;">
-                        {{your_list}}
-                    </div>
-                    <a onclick="topFunction()" id="to-top" title="Go to top" style="display: block;"
-                        class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-chevron-up"></span>
-                    </a>
-                    <form action="http://localhost:3000/similar">
-                        <input type="submit" value="Back to main page" />
-                    </form>
-                </div>
+<body>
+    <header class="info">
+        <div class="content" style="text-align: center;">
+            <h3>{{result}}</h3>
+            <a onclick="bottomFunction()" id="to-bottom" title="Go to bottom" style="display: block;"
+                class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+            <div>
+                {{your_list}}
             </div>
+            <a onclick="topFunction()" id="to-top" title="Go to top" style="display: block;"
+                class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+            <form action="http://localhost:3000/similar">
+                <input type="submit" value="Back to main page" />
+            </form>
         </div>
-    </div>
-
-
+    </header>
 </body>
 
 </html>

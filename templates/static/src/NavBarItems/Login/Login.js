@@ -35,8 +35,7 @@ export default function Login(props) {
             className="text-center"
             md={{ span: 4, offset: 4 }}
           />
-          <CardImg bottom src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-download-logo-30.png"></CardImg>
-        </Row>
+         </Row>
 
         <Row>
           <Col md={{ span: 6, offset: 4 }} lg="5" className="mb-4">

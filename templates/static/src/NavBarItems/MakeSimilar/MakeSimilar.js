@@ -102,7 +102,7 @@ const MakeSimilar = ({ smallStats }) => {
               return (
                 <form action={urlkey} method="post">
                   <h4 className="subsimilar-title">Create with similar to a song of an artist </h4>
-                  <FormLabel>Artist  </FormLabel><FormControl autoFocus type="text" name="artist" className="input-label"></FormControl>
+                  <FormLabel>Artist</FormLabel><FormControl autoFocus type="text" name="artist" className="input-label"></FormControl>
                   <FormLabel>Song </FormLabel><FormControl autoFocus type="text" name="track" className="input-label"></FormControl>
                   <FormLabel>Count </FormLabel><FormControl autoFocus type="text" name="count" className="input-label"></FormControl>
                   <FormLabel>Playlist Name </FormLabel><FormControl autoFocus type="text" name="plName" className="input-label"></FormControl>

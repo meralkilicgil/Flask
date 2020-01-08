@@ -48,6 +48,7 @@
         line-height: 12px;
         cursor: pointer;
     }
+
     #to-bottom {
         display: none;
         position: fixed;
@@ -62,46 +63,71 @@
         line-height: 12px;
         cursor: pointer;
     }
+
+    .lists {
+        background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg") no-repeat;
+        overflow: hidden;
+        background-size: cover;
+        width: 100%;
+        min-height: 100vh;
+        background-position: center top;
+        z-index: 1;
+    }
+
+    .content {
+        margin: 10% auto;
+        border-radius: 30px;
+        padding: 2%;
+        background-color: black;
+        opacity: 0.6;
+        color: white;
+        font-size: large;
+        width: 50%;
+        height: 80%;
+    }
 </style>
 <script>
     function topFunction() {
         document.documentElement.scrollTop = 0;
     }
     function bottomFunction() {
-        window.scrollTo(0,document.body.scrollHeight);
+        window.scrollTo(0, document.body.scrollHeight);
     }
 </script>
 
 <body>
-    <div class="w3-container" style="text-align: center;">
-        <h3>{{result}}</h3>    
-        <a onclick="bottomFunction()" id="to-bottom" title="Go to bottom" style="display: block;" class="btn btn-info btn-lg">
-            <span class="glyphicon glyphicon-chevron-down"></span> 
-        </a>
-        <table class="w3-table" style="width: 40%; margin: auto;">
-            <thead>
-                <tr class="w3-light-blue">
-                    <th style="text-align: center;">{{header1}}</th style="text-align: center;">
-                    <th style="text-align: center;">{{header2}}</th style="text-align: center;">
-                </tr>
-            </thead>
-            <tbody>
-                {% for your_list_element in your_list %}
-                <tr class="w3-hover-text-blue">
-                    <td style="text-align: center;">{{ your_list_element[0] }} </td>
-                    <td style="text-align: center;">{{ your_list_element[1] }} </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a onclick="topFunction()" id="to-top" title="Go to top" style="display: block;" class="btn btn-info btn-lg">
-            <span class="glyphicon glyphicon-chevron-up"></span> 
-        </a>
-        <form action="http://localhost:3000/similar">
-            <input type="submit" value="Back to main page" />
-        </form>
-    </div>
-
+    <header class="lists">
+        <div class="content" style="text-align: center;">
+            <h3>{{result}}</h3>
+            <a onclick="bottomFunction()" id="to-bottom" title="Go to bottom" style="display: block;"
+                class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+            <table class="w3-table">
+                <thead>
+                    <tr class="w3-light-blue">
+                        <th style="text-align: center;">{{header1}}</th style="text-align: center;">
+                        <th style="text-align: center;">{{header2}}</th style="text-align: center;">
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for your_list_element in your_list %}
+                    <tr class="w3-hover-text-blue">
+                        <td style="text-align: center;">{{ your_list_element[0] }} </td>
+                        <td style="text-align: center;">{{ your_list_element[1] }} </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a onclick="topFunction()" id="to-top" title="Go to top" style="display: block;"
+                class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+            <form action="http://localhost:3000/similar">
+                <input type="submit" value="Back to main page" />
+            </form>
+        </div>
+    </header>
 </body>
 
 </html>
